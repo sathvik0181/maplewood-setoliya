@@ -223,11 +223,59 @@
             }
         }
 
+                // Automated backup notebook to save data on your device hardware instantly
+        function saveToLocalBackup() {
+            localStorage.setItem('local_satoliya_teams', document.getElementById('display-teams').innerText);
+            localStorage.setItem('local_satoliya_schedule', document.getElementById('display-schedule').innerText);
+            localStorage.setItem('local_satoliya_news', document.getElementById('live-news-ticker').innerText);
+            localStorage.setItem('local_satoliya_liveAlert', document.getElementById('live-match-alert-ticker').style.display);
+            localStorage.setItem('local_satoliya_mvp', JSON.stringify(currentMvp));
+        }
+
+        // Intercepting old buttons to save locally first, then broadcast to the cloud
+        const rawUpdateSchedule = updateSchedule;
+        updateSchedule = async function() {
+            await rawUpdateSchedule();
+            saveToLocalBackup();
+        };
+
+        const rawSubmitNewMvp = submitNewMvp;
+        submitNewMvp = async function() {
+            await rawSubmitNewMvp();
+            saveToLocalBackup();
+        };
+
+        const rawSubmitNewNews = submitNewNews;
+        submitNewNews = async function() {
+            await rawSubmitNewNews();
+            saveToLocalBackup();
+        };
+
+        const rawToggleLiveGame = toggleLiveGame;
+        toggleLiveGame = async function(status) {
+            await rawToggleLiveGame(status);
+            saveToLocalBackup();
+        };
+
+        // Complete double-shield startup launcher
         window.onload = async function() { 
+            // Step 1: Instantly load your device's internal backup notebook if it exists
+            if (localStorage.getItem('local_satoliya_teams')) document.getElementById('display-teams').innerText = localStorage.getItem('local_satoliya_teams');
+            if (localStorage.getItem('local_satoliya_schedule')) document.getElementById('display-schedule').innerText = localStorage.getItem('local_satoliya_schedule');
+            if (localStorage.getItem('local_satoliya_news')) document.getElementById('live-news-ticker').innerText = localStorage.getItem('local_satoliya_news');
+            if (localStorage.getItem('local_satoliya_liveAlert')) document.getElementById('live-match-alert-ticker').style.display = localStorage.getItem('local_satoliya_liveAlert');
+            if (localStorage.getItem('local_satoliya_mvp')) {
+                currentMvp = JSON.parse(localStorage.getItem('local_satoliya_mvp'));
+            }
+            
+            // Render the screen blocks immediately so you don't look at blank spaces
             renderPlayerGrid(); 
             updateMvpDisplay(); 
+
+            // Step 2: Calmly check the global internet cloud locker. If it responds, update the page live!
             await loadFromCloud();
         };
+
     </script>
 </head>
 <body style="background-color: #111827; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0;">
