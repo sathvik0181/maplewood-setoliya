@@ -5,113 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maplewood Park Satoliya League</title>
     <script src="https://jsdelivr.net"></script>
+    
+    <script>
+        let players = [
+            { name: "Sathvik", style: "Center Catcher", stones: 18, accuracy: 65, evaded: 24 },
+            { name: "Saanvi", style: "Striker", stones: 8, accuracy: 84, evaded: 12 },
+            { name: "Sri", style: "Beginner", stones: 3, accuracy: 30, evaded: 8 },
+            { name: "Raghu", style: "All-Rounder", stones: 22, accuracy: 70, evaded: 35 },
+            { name: "Abishiek", style: "All-Rounder", stones: 19, accuracy: 62, evaded: 29 },
+            { name: "Deepika", style: "Beginner", stones: 4, accuracy: 25, evaded: 11 },
+            { name: "Arhan", style: "Center Catcher", stones: 14, accuracy: 58, evaded: 19 },
+            { name: "Shanti", style: "Beginner", stones: 2, accuracy: 35, evaded: 14 },
+            { name: "Sudhir", style: "All-Rounder", stones: 25, accuracy: 72, evaded: 41 },
+            { name: "Sriram", style: "Striker", stones: 11, accuracy: 89, evaded: 16 },
+            { name: "Gyathri", style: "Striker", stones: 9, accuracy: 81, evaded: 15 },
+            { name: "Viraj", style: "Side Catcher", stones: 13, accuracy: 50, evaded: 22 },
+            { name: "Rajvi", style: "Striker", stones: 12, accuracy: 78, evaded: 18 },
+            { name: "Vijay.S", style: "All-Rounder", stones: 20, accuracy: 68, evaded: 30 },
+            { name: "Jothi", style: "Striker", stones: 10, accuracy: 83, evaded: 14 },
+            { name: "Vaani", style: "Back Catcher", stones: 15, accuracy: 55, evaded: 26 },
+            { name: "Srihan", style: "Back Catcher", stones: 16, accuracy: 52, evaded: 28 },
+            { name: "Priyanka", style: "Striker", stones: 7, accuracy: 76, evaded: 13 },
+            { name: "Vinnay", style: "All-Rounder", stones: 17, accuracy: 60, evaded: 27 },
+            { name: "Sunil", style: "All-Rounder", stones: 21, accuracy: 64, evaded: 33 },
+            { name: "Julie", style: "Side Catcher", stones: 11, accuracy: 48, evaded: 20 },
+            { name: "Krisha", style: "Center Catcher", stones: 15, accuracy: 61, evaded: 21 },
+            { name: "Veeksha", style: "Striker", stones: 13, accuracy: 79, evaded: 17 },
+            { name: "Divya", style: "Striker", stones: 10, accuracy: 80, evaded: 19 },
+            { name: "Vijay.T", style: "All-Rounder", stones: 24, accuracy: 66, evaded: 38 },
+            { name: "Anu", style: "Striker", stones: 8, accuracy: 75, evaded: 15 },
+            { name: "Murali", style: "All-Rounder", stones: 23, accuracy: 71, evaded: 36 }
+        ];
+
+        let currentSortMetric = 'stones';
+
+        function switchTab(target) {
+            ['home', 'stats', 'admin'].forEach(tab => {
+                const view = document.getElementById(`view-${tab}`);
+                if (view) view.style.display = tab === target ? "block" : "none";
+                const btn = document.getElementById(`tab-${tab}`);
+                if (btn) {
+                    btn.style.backgroundColor = tab === target ? "#ea580c" : "#374151";
+                    btn.style.color = tab === target ? "white" : "#d1d5db";
+                }
+            });
+        }
+
+        function renderLeaderboard() {
+            let sorted = [...players];
+            if (currentSortMetric === 'stones') sorted.sort((a, b) => b.stones - a.stones);
+            else if (currentSortMetric === 'accuracy') sorted.sort((a, b) => b.accuracy - a.accuracy);
+            else if (currentSortMetric === 'evaded') sorted.sort((a, b) => b.evaded - a.evaded);
+
+            const table = document.getElementById('leaderboard-table');
+            if (!table) return;
+            table.innerHTML = '';
+            
+            sorted.forEach((player, index) => {
+                const rankText = index === 0 ? "Rank 1" : `Rank ${index + 1}`;
+                const rankStyle = index === 0 ? "color: #fbbf24; font-weight: 900;" : "color: #9ca3af;";
+                
+                table.innerHTML += `
+                    <tr style="border-bottom: 1px solid #374151;">
+                        <td style="padding: 12px; text-align: center; ${rankStyle}">${rankText}</td>
+                        <td style="padding: 12px;">
+                            <div style="font-weight: bold; color: white;">${player.name}</div>
+                            <span style="display: inline-block; font-size: 10px; background-color: #374151; color: #fdba74; padding: 2px 6px; border-radius: 4px; margin-top: 2px;">${player.style}</span>
+                        </td>
+                        <td style="padding: 12px; text-align: center; font-weight: bold; color: #f97316;">${player.stones}</td>
+                        <td style="padding: 12px; text-align: center; font-weight: bold; color: #fbbf24;">${player.accuracy}%</td>
+                        <td style="padding: 12px; text-align: center; font-weight: bold; color: #10b981;">${player.evaded}</td>
+                    </tr>
+                `;
+            });
+            const badge = document.getElementById('player-count-badge');
+            if (badge) badge.innerText = players.length;
+        }
+
+        function sortData(metric) {
+            currentSortMetric = metric;
+            ['stones', 'accuracy', 'evaded'].forEach(item => {
+                const btn = document.getElementById(`sort-${item}`);
+                if (btn) {
+                    btn.style.backgroundColor = item === metric ? "#ea580c" : "#374151";
+                    btn.style.color = item === metric ? "white" : "#d1d5db";
+                }
+            });
+            renderLeaderboard();
+        }
+
+        function checkAuth() {
+            if (document.getElementById('admin-pass').value === 'admin123') {
+                document.getElementById('admin-auth').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                renderAdminControls();
+            } else {
+                alert('Access Denied: Incorrect Admin Password');
+            }
+        }
+
+        function renderAdminControls() {
+            const deleteContainer = document.getElementById('admin-delete-list');
+            if (!deleteContainer) return;
+            deleteContainer.innerHTML = '';
+            players.forEach((p, idx) => {
+                deleteContainer.innerHTML += `
+                    <button onclick="removePlayer(${idx})" style="background-color: #111827; border: 1px solid #7f1d1d; color: #9ca3af; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; margin: 2px;">
+                        ${p.name} x
+                    </button>
+                `;
+            });
+        }
+
+        function updateSchedule() {
+            const teams = document.getElementById('input-teams').value;
+            const schedule = document.getElementById('input-schedule').value;
+            if (teams) document.getElementById('display-teams').innerText = teams;
+            if (schedule) document.getElementById('display-schedule').innerText = schedule + " | Field: Maplewood Park";
+            alert("Match details updated successfully!");
+        }
+
+        function addNewPlayer() {
+            const name = document.getElementById('new-name').value.trim();
+            const style = document.getElementById('new-style').value;
+            if (!name) return alert("Please enter player's full name.");
+            
+            players.push({ name: name, style: style, stones: 0, accuracy: 0, evaded: 0 });
+            document.getElementById('new-name').value = '';
+            renderLeaderboard();
+            renderAdminControls();
+            alert(`${name} added to the Satoliya database.`);
+        }
+
+        function removePlayer(index) {
+            if(confirm(`Are you sure you want to remove ${players[index].name} from the entire league?`)) {
+                players.splice(index, 1);
+                renderLeaderboard();
+                renderAdminControls();
+            }
+        }
+
+        window.onload = function() {
+            renderLeaderboard();
+        };
+    </script>
 </head>
 <body style="background-color: #111827; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0;">
 
-    <!-- Fixed Structural Navigation Bar -->
-    <nav style="background-color: #1f2937; border-b: 1px solid #374151; padding: 16px; position: relative; z-index: 100;">
+    <!-- Navigation Bar -->
+    <nav style="background-color: #1f2937; border-bottom: 1px solid #374151; padding: 16px; position: sticky; top: 0; z-index: 50;">
         <div style="max-w: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <span style="font-size: 20px; font-weight: 900; color: #f97316; letter-spacing: 0.05em;">MAPLEWOOD SATOLIYA</span>
+            <span style="font-size: 20px; font-weight: 900; color: #f97316;">MAPLEWOOD SATOLIYA</span>
             <div style="display: flex; gap: 8px;">
-                <button onclick="switchTab('home')" id="tab-home" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer; transition: 0.2s;">Home & Rules</button>
-                <button onclick="switchTab('stats')" id="tab-stats" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer; transition: 0.2s;">Leaderboards</button>
-                <button onclick="switchTab('admin')" id="tab-admin" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer; transition: 0.2s;">Admin Panel</button>
+                <button onclick="switchTab('home')" id="tab-home" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer;">Home & Rules</button>
+                <button onclick="switchTab('stats')" id="tab-stats" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Leaderboards</button>
+                <button onclick="switchTab('admin')" id="tab-admin" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Admin Panel</button>
             </div>
         </div>
     </nav>
 
-    <!-- Header Banner -->
-    <header style="background: linear-gradient(to bottom, #ea580c, #d97706); padding: 48px 16px; text-align: center; position: relative; z-index: 10;">
+    <!-- Header Section -->
+    <header style="background: linear-gradient(to bottom, #ea580c, #d97706); padding: 40px 16px; text-align: center;">
         <h1 style="font-size: 40px; font-weight: 800; margin: 0; color: white; text-transform: uppercase;">Maplewood Satoliya Hub</h1>
-        <p style="color: #ffedd5; margin-top: 8px; font-weight: 500; margin-bottom: 0;">Welcome to our local community's traditional street game league!</p>
-    </header>
 
-    <!-- Match Information Panels -->
-    <div style="max-w: 1100px; margin: -24px auto 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; position: relative; z-index: 20;">
-        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);">
-            <span style="background-color: #f97316; color: white; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">Next Fixture</span>
-            <h2 id="display-teams" style="font-size: 20px; font-weight: bold; margin: 8px 0 0 0; color: white;">Team Thunder vs. Team Cyclone</h2>
-            <p id="display-schedule" style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Sunday at 4:00 PM | Field: Maplewood Park</p>
-        </div>
-        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);">
-            <span style="color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase;">Active Leaguers</span>
-            <div id="player-count-badge" style="font-size: 36px; font-weight: 900; color: #fbbf24; margin-top: 4px;">27</div>
-            <span style="font-size: 12px; color: #6b7280;">Official League Roster</span>
-        </div>
-    </div>
-
-    <!-- TAB 1: HOME PAGE -->
-    <main id="view-home" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: block;">
-        <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151; margin-bottom: 32px;">
-            <h2 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin-top: 0; margin-bottom: 12px;">Welcome to our Satoliya League!</h2>
-            <p style="color: #d1d5db; line-height: 1.6; margin: 0 0 16px 0;">
-                What started a few years ago as a fun weekend gathering has grown into an incredible local community tradition! 
-                <strong>Satoliya</strong> (also known as Pithu or Seven Stones) is an ancient, action-packed street game from India that balances strategy, running, accuracy, and quick teamwork. 
-            </p>
-            <p style="color: #d1d5db; line-height: 1.6; margin: 0;">
-                Whether you are a seasoned veteran aiming for the top of our leaderboard, or a beginner looking to join our friendly matches, there is a place for you here. We play regular games right here in the community. Come down to meet the players, experience the culture, and jump into the action!
-            </p>
-        </section>
-
-        <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
-            <h2 style="font-size: 24px; font-weight: 900; color: #f97316; border-bottom: 1px solid #374151; padding-bottom: 12px; margin-top: 0; margin-bottom: 16px;">How To Play: The Official Rules</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px;">
-                <div>
-                    <h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 8px 0;">1. Setup & Teams</h3>
-                    <p style="color: #d1d5db; line-height: 1.5; margin: 0;">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into two squads: Seekers and Hitters.</p>
-                </div>
-                <div>
-                    <h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 8px 0;">2. The Opening Throw</h3>
-                    <p style="color: #d1d5db; line-height: 1.5; margin: 0;">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances. If they miss all three, the teams switch roles immediately.</p>
-                </div>
-                <div>
-                    <h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 8px 0;">3. Rebuilding the Tower</h3>
-                    <p style="color: #d1d5db; line-height: 1.5; margin: 0;">Once the stones fall, the Seekers must rush to stack all 7 back up in order. Meanwhile, the Hitters retrieve the ball and try to tag the Seekers out by hitting them below the shoulders.</p>
-                </div>
-                <div>
-                    <h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 8px 0;">4. Winning a Round</h3>
-                    <p style="color: #d1d5db; line-height: 1.5; margin: 0;">If the Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point. If the Hitters tag all Seekers out before the pile is rebuilt, the Hitters win the round.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- TAB 2: LEADERBOARDS -->
-    <section id="view-stats" style="max-w: 1100px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
-        <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;">
-                <div>
-                    <h3 style="font-size: 24px; font-weight: bold; color: #fbbf24; margin: 0;">Player Leaderboard</h3>
-                    <p style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Sort metrics to showcase field specialists.</p>
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button onclick="sortData('stones')" id="sort-stones" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer;">Stones Stacked</button>
-                    <button onclick="sortData('accuracy')" id="sort-accuracy" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Accuracy</button>
-                    <button onclick="sortData('evaded')" id="sort-evaded" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Hits Evaded</button>
-                </div>
-            </div>
-
-            <div style="overflow-x: auto; border-radius: 8px; border: 1px solid #374151;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 500px;">
-                    <thead>
-                        <tr style="background-color: #374151; color: #d1d5db; text-transform: uppercase; font-size: 12px;">
-                            <th style="padding: 12px; text-align: center; width: 80px;">Rank</th>
-                            <th style="padding: 12px;">Player / Position</th>
-                            <th style="padding: 12px; text-align: center; width: 100px;">Stones</th>
-                            <th style="padding: 12px; text-align: center; width: 100px;">Accuracy</th>
-                            <th style="padding: 12px; text-align: center; width: 100px;">Evaded</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboard-table">
-                        <!-- Filled by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- TAB 3: ADMIN PANEL -->
-    <section id="view-admin" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
 
 
 
