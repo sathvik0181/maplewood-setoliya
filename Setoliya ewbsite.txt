@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maplewood Park Satoliya League</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50 px-4 py-3 shadow-md">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center">
+            <span class="text-xl font-black tracking-wider text-orange-500 uppercase">💥 MAPLEWOOD SATOLIYA</span>
+            <div class="flex space-x-2 mt-2 sm:mt-0">
+                <button onclick="switchTab('home')" id="tab-home" class="px-3 py-1.5 rounded-lg text-sm font-bold bg-orange-600 text-white">🏠 Home & Rules</button>
+                <button onclick="switchTab('stats')" id="tab-stats" class="px-3 py-1.5 rounded-lg text-sm font-bold bg-gray-700 text-gray-300 hover:bg-gray-600">🏆 Leaderboards</button>
+                <button onclick="switchTab('admin')" id="tab-admin" class="px-3 py-1.5 rounded-lg text-sm font-bold bg-gray-700 text-gray-300 hover:bg-gray-600">🔒 Admin Panel</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-b from-orange-600 to-amber-600 py-12 px-4 text-center shadow-inner">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight uppercase text-white drop-shadow-md">🏆 Maplewood Satoliya Hub 🏆</h1>
+        <p class="text-orange-100 mt-2 font-medium max-w-xl mx-auto">Welcome to our local community's traditional street game league!</p>
+    </header>
+
+    <!-- Info Banners (Always Visible) -->
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-4 -mt-6 relative z-10">
+        <!-- Next Match Banner -->
+        <div class="bg-gray-800 p-5 rounded-xl shadow-xl border border-gray-700 md:col-span-2">
+            <span class="bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase">Next Fixture</span>
+            <h2 id="display-teams" class="text-xl font-bold mt-2 text-white">Team Thunder vs. Team Cyclone</h2>
+            <p id="display-schedule" class="text-gray-400 text-sm mt-1">🗓️ Sunday at 4:00 PM | 📍 Maplewood Park</p>
+        </div>
+        <!-- Quick Stats Badge -->
+        <div class="bg-gray-800 p-5 rounded-xl shadow-xl border border-gray-700 flex flex-col justify-center items-center text-center">
+            <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Active Leaguers</span>
+            <span id="player-count-badge" class="text-4xl font-black text-amber-400 mt-1">27</span>
+            <span class="text-xs text-gray-500 mt-1">Sathvik's Official Roster</span>
+        </div>
+    </div>
+
+    <!-- TAB 1: HOME PAGE & RULES -->
+    <main id="view-home" class="max-w-4xl mx-auto mt-8 px-4 mb-16 block space-y-8">
+        <!-- Welcome Introduction Box -->
+        <section class="bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-700">
+            <h2 class="text-2xl font-black text-amber-400 mb-3">👋 Welcome to our Satoliya League!</h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                What started a few years ago as a fun weekend gathering has grown into an incredible local community tradition! 
+                <strong>Satoliya</strong> (also known as Pithu or Seven Stones) is an ancient, action-packed street game from India that balances strategy, running, accuracy, and quick teamwork. 
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+                Whether you are a seasoned veteran aiming for the top of our leaderboard, or a beginner looking to join our friendly matches, there is a place for you here. We play regular games right here in the community. Come down to meet the players, experience the culture, and jump into the action!
+            </p>
+        </section>
+
+        <!-- Official How To Play Section -->
+        <section class="bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-700 space-y-6">
+            <h2 class="text-2xl font-black text-orange-500 border-b border-gray-700 pb-3">🪨 How To Play: The Official Rules</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <h3 class="text-lg font-bold text-amber-400 mb-2">1. Setup & Teams</h3>
+                    <p class="text-gray-300 leading-relaxed">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into two squads: <strong>The Seekers (Attackers)</strong> and <strong>The Hitters (Defenders)</strong>.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-400 mb-2">2. The Opening Throw</h3>
+                    <p class="text-gray-300 leading-relaxed">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances. If they miss all three, the teams switch roles immediately.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-400 mb-2">3. Rebuilding the Tower</h3>
+                    <p class="text-gray-300 leading-relaxed">Once the stones fall, the Seekers must rush to stack all 7 back up in order. Meanwhile, the Hitters retrieve the ball and try to tag the Seekers out by hitting them below the shoulders.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-amber-400 mb-2">4. Winning a Round</h3>
+                    <p class="text-gray-300 leading-relaxed">If the Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point. If the Hitters tag all Seekers out before the pile is rebuilt, the Hitters win the round.</p>
+                </div>
+            </div>
+
+            <!-- Position Explainer Dashboard Box -->
+            <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-700">
+                <h4 class="font-bold text-white mb-2">🎯 Positional Strategy Guide</h4>
+                <ul class="list-disc pl-5 text-sm space-y-1.5 text-gray-400">
+                    <li><strong class="text-orange-400">Strikers:</strong> Handled by raw snipers like Saanvi and Sriram. Their focus is pure target-throwing accuracy to blast the stones apart.</li>
+                    <li><strong class="text-emerald-400">Catchers (Center/Side/Back):</strong> Field general defensive sentries like Sathvik, Viraj, or Vaani. They lock down retrieval spaces to tag out runners quickly.</li>
+                    <li><strong class="text-amber-400">Beginners:</strong> Fresh entries like Sri and Deepika learning dodge tempos, field safety, and recovery stacking patterns.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- TAB 2: LEADERBOARDS & PROFILES -->
+    <section id="view-stats" class="max-w-6xl mx-auto mt-8 px-4 mb-16 hidden">
+        <div class="bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-700">
+            <div class="sm:flex sm:items-center sm:justify-between mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-amber-400">Player Leaderboard</h3>
+                    <p class="text-gray-400 text-sm">Sort data metrics to showcase field specialists.</p>
+                </div>
+                <!-- Leaderboard Filter Controls -->
+                <div class="flex flex-wrap gap-1.5 mt-4 sm:mt-0">
+                    <button onclick="sortData('stones')" id="sort-stones" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-orange-600 text-white shadow">🪨 Stones Stacked</button>
+                    <button onclick="sortData('accuracy')" id="sort-accuracy" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-700 text-gray-300 hover:bg-gray-600">🎯 Accuracy</button>
+                    <button onclick="sortData('evaded')" id="sort-evaded" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-700 text-gray-300 hover:bg-gray-600">🏃‍♂️ Hits Evaded</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Table container -->
+            <div class="overflow-x-auto rounded-lg border border-gray-700">
+                <div class="min-w-[600px] grid grid-cols-12 bg-gray-700 p-3 font-bold text-xs text-gray-300 tracking-wider uppercase">
+                    <div class="col-span-2 text-center">Rank</div>
+                    <div class="col-span-4">Player / Play Style</div>
+                    <div class="col-span-2 text-center">Stones</div>
+                    <div class="col-span-2 text-center">Accuracy</div>
+                    <div class="col-span-2 text-center">Evaded</div>
+                </div>
+                <div id="leaderboard-table" class="min-w-[600px] divide-y divide-gray-700 bg-gray-800/40">
+                    <!-- Rows injected here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 3: ADMIN PANEL -->
+    <section id="view-admin" class="max-w-4xl mx-auto mt-8 px-4 mb-16 hidden">
+        <!-- Auth Wall -->
+        <div id="admin-auth" class="bg-gray-800 p-8 rounded-xl text-center shadow-xl max-w-md mx-auto border border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🔐 Sathvik's Admin Access</h2>
+            <input type="password" id="admin-pass" placeholder="Enter Admin Password" class="w-full bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2 mb-4 text-center focus:outline-none focus:border-orange-500">
+            <button onclick="checkAuth()" class="w-full bg-orange-600 hover:bg-orange-500 font-bold py-2 rounded-lg transition">Login Dashboard</button>
+            <p class="text-xs text-gray-500 mt-2">Default initialization passcode: <code class="text-gray-400">admin123</code></p>
+        </div>
+
+        <!-- Dashboard Content -->
