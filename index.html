@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maplewood Park Satoliya League</title>
-    <script src="https://tailwindcss.com"></script>
     
     <script>
         // Core League Database
@@ -49,7 +48,8 @@
                 if (view) view.style.display = tab === target ? "block" : "none";
                 const btn = document.getElementById(`tab-${tab}`);
                 if (btn) {
-                    btn.className = tab === target ? "px-4 py-2 rounded-lg text-sm font-bold bg-orange-600 text-white border-none cursor-pointer" : "px-4 py-2 rounded-lg text-sm font-bold bg-gray-700 text-gray-300 border-none cursor-pointer";
+                    btn.style.backgroundColor = tab === target ? "#ea580c" : "#374151";
+                    btn.style.color = tab === target ? "white" : "#d1d5db";
                 }
             });
         }
@@ -59,13 +59,13 @@
             grid.innerHTML = '';
             players.forEach((player) => {
                 grid.innerHTML += `
-                    <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 shadow-md">
-                        <h4 class="text-lg font-bold text-white">${player.name}</h4>
-                        <span class="inline-block text-xs bg-gray-700 text-orange-300 font-medium px-2 py-0.5 rounded mt-1">${player.style}</span>
-                        <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-gray-700/60 text-center text-xs">
-                            <div><p class="text-gray-400 font-medium">Stones</p><p class="text-base font-bold text-orange-400 mt-0.5">${player.stones}</p></div>
-                            <div><p class="text-gray-400 font-medium">Accuracy</p><p class="text-base font-bold text-amber-400 mt-0.5">${player.accuracy}%</p></div>
-                            <div><p class="text-gray-400 font-medium">Evaded</p><p class="text-base font-bold text-emerald-400 mt-0.5">${player.evaded}</p></div>
+                    <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <h4 style="font-size: 18px; font-weight: bold; color: white; margin: 0;">${player.name}</h4>
+                        <span style="display: inline-block; font-size: 12px; background-color: #374151; color: #fdba74; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 500;">${player.style}</span>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid #374151; text-align: center; font-size: 12px;">
+                            <div><p style="color: #9ca3af; margin: 0;">Stones</p><p style="font-size: 16px; font-weight: bold; color: #f97316; margin: 2px 0 0 0;">${player.stones}</p></div>
+                            <div><p style="color: #9ca3af; margin: 0;">Accuracy</p><p style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 2px 0 0 0;">${player.accuracy}%</p></div>
+                            <div><p style="color: #9ca3af; margin: 0;">Evaded</p><p style="font-size: 16px; font-weight: bold; color: #10b981; margin: 2px 0 0 0;">${player.evaded}</p></div>
                         </div>
                     </div>
                 `;
@@ -100,7 +100,7 @@
             if (!deleteContainer) return;
             deleteContainer.innerHTML = '';
             players.forEach((p, idx) => {
-                deleteContainer.innerHTML += `<button onclick="removePlayer(${idx})" class="bg-gray-900 border border-red-900 text-gray-400 p-2 rounded text-xs cursor-pointer hover:bg-red-900/20 hover:text-red-400 transition">${p.name} x</button>`;
+                deleteContainer.innerHTML += `<button onclick="removePlayer(${idx})" style="background-color: #111827; border: 1px solid #7f1d1d; color: #9ca3af; padding: 8px; border-radius: 4px; font-size: 12px; cursor: pointer; transition: 0.2s; margin: 4px;">${p.name} x</button>`;
             });
         }
 
@@ -147,138 +147,138 @@
         window.onload = function() { renderPlayerGrid(); updateMvpDisplay(); };
     </script>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+<body style="background-color: #111827; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0;">
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 border-b border-gray-700 p-4 sticky top-0 z-50 shadow-md">
-        <div class="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-3">
-            <span class="text-xl font-black tracking-wider text-orange-500">MAPLEWOOD SATOLIYA</span>
-            <div class="flex gap-2">
-                <button onclick="switchTab('home')" id="tab-home" class="px-4 py-2 rounded-lg text-sm font-bold bg-orange-600 text-white border-none cursor-pointer">Home & Rules</button>
-                <button onclick="switchTab('players')" id="tab-players" class="px-4 py-2 rounded-lg text-sm font-bold bg-gray-700 text-gray-300 border-none cursor-pointer">Players Directory</button>
-                <button onclick="switchTab('admin')" id="tab-admin" class="px-4 py-2 rounded-lg text-sm font-bold bg-gray-700 text-gray-300 border-none cursor-pointer">Admin Panel</button>
+    <nav style="background-color: #1f2937; border-bottom: 1px solid #374151; padding: 16px; position: sticky; top: 0; z-index: 50;">
+        <div style="max-w: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <span style="font-size: 20px; font-weight: 900; color: #f97316;">MAPLEWOOD SATOLIYA</span>
+            <div style="display: flex; gap: 8px;">
+                <button onclick="switchTab('home')" id="tab-home" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer;">Home & Rules</button>
+                <button onclick="switchTab('players')" id="tab-players" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Players Directory</button>
+                <button onclick="switchTab('admin')" id="tab-admin" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Admin Panel</button>
             </div>
         </div>
     </nav>
 
     <!-- Header Section -->
-    <header class="bg-gradient-to-b from-orange-600 to-amber-600 py-12 px-4 text-center">
-        <h1 class="text-4xl font-extrabold text-white uppercase tracking-tight">Maplewood Satoliya Hub</h1>
-        <p class="text-orange-100 mt-2 font-medium">Welcome to our local community's traditional street game league!</p>
+    <header style="background: linear-gradient(to bottom, #ea580c, #d97706); padding: 40px 16px; text-align: center;">
+        <h1 style="font-size: 40px; font-weight: 800; margin: 0; color: white; text-transform: uppercase;">Maplewood Satoliya Hub</h1>
+        <p style="color: #ffedd5; margin-top: 8px; font-weight: 500;">Welcome to our local community's traditional street game league!</p>
     </header>
 
     <!-- Info Banners -->
-    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-4 -mt-6 relative z-10">
-        <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 md:col-span-2 shadow-lg">
-            <span class="bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase">Next Fixture</span>
-            <h2 id="display-teams" class="text-xl font-bold mt-2 text-white">Team Thunder vs. Team Cyclone</h2>
-            <p id="display-schedule" class="text-gray-400 text-sm mt-1">Sunday at 4:00 PM | Field: Maplewood Park</p>
+    <div style="max-w: 1100px; margin: -24px auto 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; position: relative; z-index: 10;">
+        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);">
+            <span style="background-color: #f97316; color: white; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">Next Fixture</span>
+            <h2 id="display-teams" style="font-size: 20px; font-weight: bold; margin: 8px 0 0 0; color: white;">Team Thunder vs. Team Cyclone</h2>
+            <p id="display-schedule" style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Sunday at 4:00 PM | Field: Maplewood Park</p>
         </div>
-        <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 text-center shadow-lg flex flex-col justify-center">
-            <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">Active Leaguers</span>
-            <div id="player-count-badge" class="text-4xl font-black text-amber-400 mt-1">27</div>
-            <span class="text-xs text-gray-500 mt-0.5">Official League Roster</span>
+        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); display: flex; flex-direction: column; justify-content: center;">
+            <span style="color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase;">Active Leaguers</span>
+            <div id="player-count-badge" style="font-size: 36px; font-weight: 900; color: #fbbf24; margin-top: 4px;">27</div>
+            <span style="font-size: 12px; color: #6b7280; margin-top: 2px;">Official League Roster</span>
         </div>
     </div>
 
     <!-- TAB 1: HOME PAGE -->
-    <main id="view-home" class="max-w-4xl mx-auto mt-8 px-4 mb-16 block space-y-8">
+    <main id="view-home" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: block;">
         <!-- Live News Alert Box -->
-        <div class="bg-gray-800 p-5 rounded-xl border-l-4 border-sky-500 shadow-md">
-            <div class="flex items-center gap-2 mb-2">
-                <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
-                <h3 class="text-sm font-bold text-sky-400 uppercase tracking-wider">📢 Satoliya News Bulletin</h3>
+        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border-left: 4px solid #38bdf8; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 24px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <h3 style="font-size: 14px; font-weight: bold; color: #38bdf8; text-transform: uppercase; margin: 0; tracking-spacing: 0.05em;">📢 Satoliya News Bulletin</h3>
             </div>
-            <p id="live-news-ticker" class="text-gray-300 text-sm leading-relaxed">All clear! Standard weekend pickup games are currently active at Maplewood Park. Come down ready to play!</p>
+            <p id="live-news-ticker" style="color: #d1d5db; font-size: 14px; line-height: 1.6; margin: 0;">All clear! Standard weekend pickup games are currently active at Maplewood Park. Come down ready to play!</p>
         </div>
 
-        <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-md">
-            <h2 class="text-2xl font-black text-amber-400 mb-3">Welcome to our Satoliya League!</h2>
-            <p class="text-gray-300 leading-relaxed mb-4">
+        <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151; margin-bottom: 32px;">
+            <h2 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin-top: 0; margin-bottom: 12px;">Welcome to our Satoliya League!</h2>
+            <p style="color: #d1d5db; line-height: 1.6; margin: 0 0 16px 0;">
                 What started a few years ago as a fun weekend gathering has grown into an incredible local community tradition! 
                 <strong>Satoliya</strong> is an ancient, action-packed street game from India that balances strategy, running, accuracy, and quick teamwork. 
             </p>
-            <p class="text-gray-300 leading-relaxed">We play regular games right here in the community at Maplewood Park. Come down to meet the players, experience the culture, and jump into the action!</p>
+            <p style="color: #d1d5db; line-height: 1.6; margin: 0;">We play regular games right here in the community at Maplewood Park. Come down to meet the players, experience the culture, and jump into the action!</p>
         </section>
 
         <!-- Weekly MVP Panel -->
-        <section class="bg-gradient-to-r from-amber-600/20 via-orange-600/10 to-amber-600/20 p-6 rounded-xl border-2 border-amber-500/40 shadow-xl text-center">
-            <div class="inline-block bg-amber-500 text-gray-900 text-xs font-black uppercase px-3 py-1 rounded-full tracking-widest mb-3 animate-pulse">🏆 MVP of the Week 🏆</div>
-            <h3 id="mvp-card-name" class="text-3xl font-black text-white tracking-wide">Saanvi</h3>
-            <p id="mvp-card-style" class="text-sm font-semibold text-amber-300 tracking-wider uppercase mt-1">Striker</p>
-            <div class="max-w-xl mx-auto mt-4 bg-gray-900/60 p-4 rounded-xl border border-gray-700/50">
-                <p id="mvp-card-reason" class="text-gray-300 italic text-sm sm:text-base leading-relaxed">"Dominated the field as Striker with an insane 84% accuracy rate, destroying the stone tower in three consecutive rounds!"</p>
-            </div>
-        </section>
-
-        <!-- Rules Panel -->
-        <section class="bg-gray-800 p-6 rounded-xl border border-gray-700 space-y-6">
-            <h2 class="text-2xl font-black text-orange-500 border-b border-gray-700 pb-3">How To Play: The Official Rules</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                <div><h3 class="text-base font-bold text-amber-400 mb-1.5">1. Setup & Teams</h3><p class="text-gray-300 leading-relaxed">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into squads: Seekers and Hitters.</p></div>
-                <div><h3 class="text-base font-bold text-amber-400 mb-1.5">2. The Opening Throw</h3><p class="text-gray-300 leading-relaxed">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances.</p></div>
-                <div><h3 class="text-base font-bold text-amber-400 mb-1.5">3. Rebuilding the Tower</h3><p class="text-gray-300 leading-relaxed">Once the stones fall, Seekers must rush to stack them back up in order. Hitters retrieve the ball and try to tag them out below the shoulders.</p></div>
-                <div><h3 class="text-base font-bold text-amber-400 mb-1.5">4. Winning a Round</h3><p class="text-gray-300 leading-relaxed">If Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point.</p></div>
+        <section style="background: linear-gradient(to right, rgba(217,119,6,0.15), rgba(234,88,12,0.1), rgba(217,119,6,0.15)); padding: 24px; border-radius: 12px; border: 2px solid rgba(245,158,11,0.4); text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #f59e0b; color: #111827; font-size: 12px; font-weight: 900; text-transform: uppercase; padding: 4px 12px; border-radius: 9999px; margin-bottom: 12px;">🏆 MVP of the Week 🏆</div>
+            <h3 id="mvp-card-name" style="font-size: 30px; font-weight: 900; color: white; margin: 0;">Saanvi</h3>
+            <p id="mvp-card-style" style="font-size: 14px; font-weight: 600; color: #fde047; text-transform: uppercase; margin: 4px 0 0 0;">Striker</p>
+            <div style="max-w: 600px; margin: 16px auto 0 auto; background-color: rgba(17,24,39,0.6); padding: 16px; border-radius: 12px; border: 1px solid rgba(55,65,81,0.5);">
+                <p id="mvp-card-reason" style="color: #d1d5db; font-style: italic; font-size: 15px; line-height: 1.6; margin: 0;">"Dominated the field as Striker with an insane 84% accuracy rate, destroying the stone tower in three consecutive rounds!"</p>
             </div>
         </section>
     </main>
+        <!-- Rules Panel Inside Tab 1 -->
+        <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151; max-w: 800px; margin: 0 auto 64px auto;">
+            <h2 style="font-size: 24px; font-weight: 900; color: #f97316; border-bottom: 1px solid #374151; padding-bottom: 12px; margin-top: 0; margin-bottom: 16px;">How To Play: The Official Rules</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px;">
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">1. Setup & Teams</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into squads: Seekers and Hitters.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">2. The Opening Throw</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">3. Rebuilding the Tower</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">Once the stones fall, Seekers must rush to stack them back up in order. Hitters retrieve the ball and try to tag them out below the shoulders.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">4. Winning a Round</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">If Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point.</p></div>
+            </div>
+        </section>
+
     <!-- TAB 2: PLAYERS DIRECTORY -->
-    <section id="view-players" class="max-w-6xl mx-auto mt-8 px-4 mb-16 hidden">
-        <div class="mb-6">
-            <h3 class="text-2xl font-black text-amber-400">Players Directory</h3>
-            <p class="text-gray-400 text-sm mt-0.5">Meet the active community members of our Maplewood Park league.</p>
+    <section id="view-players" style="max-w: 1100px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
+        <div style="margin-bottom: 24px;">
+            <h3 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin: 0;">Players Directory</h3>
+            <p style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Meet the active community members of our Maplewood Park league.</p>
         </div>
-        <div id="player-profile-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div id="player-profile-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;"></div>
     </section>
 
     <!-- TAB 3: ADMIN CONSOLE SUITE -->
-    <section id="view-admin" class="max-w-4xl mx-auto mt-8 px-4 mb-16 hidden">
-        <!-- Auth Wall -->
-        <div id="admin-auth" class="bg-gray-800 p-8 rounded-xl border border-gray-700 text-center max-w-sm mx-auto shadow-xl">
-            <h2 class="text-xl font-bold mb-4">Sathvik's Admin Access</h2>
-            <input type="password" id="admin-pass" placeholder="Enter Admin Password" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-center text-white mb-4 outline-none">
-            <button onclick="checkAuth()" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-lg border-none cursor-pointer">Login Dashboard</button>
-            <p class="text-xs text-gray-500 mt-3 mb-0">Default passcode: <code class="text-gray-400">admin123</code></p>
+    <section id="view-admin" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
+        <!-- Auth Wall (Enforced Hidden Default State) -->
+        <div id="admin-auth" style="background-color: #1f2937; padding: 32px; border-radius: 12px; border: 1px solid #374151; text-align: center; max-w: 400px; margin: 0 auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);">
+            <h2 style="font-size: 20px; font-weight: bold; margin-top: 0; margin-bottom: 16px;">Sathvik's Admin Access</h2>
+            <input type="password" id="admin-pass" placeholder="Enter Admin Password" style="width: 90%; background-color: #111827; color: white; border: 1px solid #374151; border-radius: 8px; padding: 10px; text-align: center; font-size: 16px; margin-bottom: 16px; outline: none;">
+            <button onclick="checkAuth()" style="width: 95%; background-color: #ea580c; color: white; font-weight: bold; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">Login Dashboard</button>
+            <p style="font-size: 12px; color: #6b7280; margin-top: 12px; margin-bottom: 0;">Default passcode: <code style="color: #9ca3af;">admin123</code></p>
         </div>
 
-        <div id="admin-dashboard" class="hidden flex-col gap-6">
+        <div id="admin-dashboard" style="display: none; flex-direction: column; gap: 24px; max-w: 600px; margin: 0 auto;">
             <!-- News Bulletin Broadcast Tool -->
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-md">
-                <h3 class="text-lg font-bold text-sky-400 mb-4">📢 Broadcast Satoliya News</h3>
-                <textarea id="input-news-text" rows="3" placeholder="e.g. Weather Alert: High chance of rain. Moving matches to the indoor gym today!" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white outline-none resize-none"></textarea>
-                <button onclick="submitNewNews()" class="mt-4 bg-sky-500 hover:bg-sky-400 text-gray-900 font-bold px-5 py-2 rounded-lg border-none cursor-pointer text-sm">Publish News Alert</button>
+            <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
+                <h3 style="font-size: 18px; font-weight: bold; color: #38bdf8; margin-top: 0; margin-bottom: 16px;">📢 Broadcast Satoliya News</h3>
+                <textarea id="input-news-text" rows="3" placeholder="e.g. Weather Alert: High chance of rain. Moving matches to the indoor gym today!" style="width: 95%; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none; resize: none;"></textarea>
+                <button onclick="submitNewNews()" style="margin-top: 16px; background-color: #0284c7; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">Publish News Alert</button>
             </div>
 
             <!-- Crowning the Weekly MVP -->
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-md">
-                <h3 class="text-lg font-bold text-amber-400 mb-4">👑 Crowning the Weekly MVP</h3>
-                <div class="flex flex-col gap-3">
+            <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
+                <h3 style="font-size: 18px; font-weight: bold; color: #fbbf24; margin-top: 0; margin-bottom: 16px;">👑 Crowning the Weekly MVP</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Select League Member</label>
-                        <select id="input-mvp-name" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white outline-none"></select>
+                        <label style="display: block; font-size: 12px; font-weight: bold; color: #9ca3af; text-transform: uppercase; margin-bottom: 4px;">Select League Member</label>
+                        <select id="input-mvp-name" style="width: 98%; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none;"></select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">MVP Highlight Reason</label>
-                        <textarea id="input-mvp-reason" rows="3" placeholder="Explain their clutch highlight play..." class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white outline-none resize-none"></textarea>
+                        <label style="display: block; font-size: 12px; font-weight: bold; color: #9ca3af; text-transform: uppercase; margin-bottom: 4px;">MVP Highlight Reason</label>
+                        <textarea id="input-mvp-reason" rows="3" placeholder="Explain their clutch highlight play..." style="width: 95%; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none; resize: none;"></textarea>
                     </div>
                 </div>
-                <button onclick="submitNewMvp()" class="mt-4 bg-amber-500 hover:bg-amber-400 text-gray-900 font-bold px-5 py-2 rounded-lg border-none cursor-pointer text-sm">Announce Weekly MVP</button>
+                <button onclick="submitNewMvp()" style="margin-top: 16px; background-color: #d97706; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">Announce Weekly MVP</button>
             </div>
 
             <!-- Match Schedule -->
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-md">
-                <h3 class="text-lg font-bold text-orange-400 mb-4">Update Next Match Schedule</h3>
-                <div class="flex flex-col gap-3">
-                    <input type="text" id="input-teams" placeholder="e.g. Sathvik's Squad vs Saanvi's Strikers" class="bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white text-sm outline-none">
-                    <input type="text" id="input-schedule" placeholder="e.g. Saturday at 5:00 PM" class="bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white text-sm outline-none">
+            <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
+                <h3 style="font-size: 18px; font-weight: bold; color: #f97316; margin-top: 0; margin-bottom: 16px;">Update Next Match Schedule</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="text" id="input-teams" placeholder="e.g. Sathvik's Squad vs Saanvi's Strikers" style="width: 95%; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none;">
+                    <input type="text" id="input-schedule" placeholder="e.g. Saturday at 5:00 PM" style="width: 95%; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none;">
                 </div>
-                <button onclick="updateSchedule()" class="mt-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2 rounded-lg border-none cursor-pointer text-sm">Update Display Banner</button>
+                <button onclick="updateSchedule()" style="margin-top: 16px; background-color: #059669; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">Update Display Banner</button>
             </div>
 
-            <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-md">
-                <h3 class="text-lg font-bold text-white mb-4">Roster League Management</h3>
-                <div class="flex flex-wrap gap-3 mb-4">
-                    <input type="text" id="new-name" placeholder="Full Name" class="flex-1 min-w-[160px] bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white text-sm outline-none">
-                    <select id="new-style" class="min-w-[160px] bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-white text-sm outline-none">
+            <!-- Roster Management -->
+            <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
+                <h3 style="font-size: 18px; font-weight: bold; color: white; margin-top: 0; margin-bottom: 16px;">Roster League Management</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                    <input type="text" id="new-name" placeholder="Full Name" style="flex: 1; min-width: 150px; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none;">
+                    <select id="new-style" style="min-width: 150px; background-color: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px; color: white; font-size: 14px; outline: none;">
                         <option value="Center Catcher">Center Catcher</option>
                         <option value="Side Catcher">Side Catcher</option>
                         <option value="Back Catcher">Back Catcher</option>
@@ -286,11 +286,11 @@
                         <option value="All-Rounder">All-Rounder</option>
                         <option value="Beginner">Beginner</option>
                     </select>
-                    <button onclick="addNewPlayer()" class="bg-orange-600 hover:bg-orange-500 text-white font-bold px-5 py-2.5 rounded-lg border-none cursor-pointer text-sm">Add To League</button>
+                    <button onclick="addNewPlayer()" style="background-color: #ea580c; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">Add To League</button>
                 </div>
-                <div class="border-t border-gray-700 pt-4">
-                    <p class="text-xs text-gray-400 mb-2">Current Members (Click to remove from league completely):</p>
-                    <div id="admin-delete-list" class="flex flex-wrap gap-2"></div>
+                <div style="border-top: 1px solid #374151; padding-top: 16px;">
+                    <p style="font-size: 12px; color: #9ca3af; margin-bottom: 8px;">Current Members (Click to remove from league completely):</p>
+                    <div id="admin-delete-list" style="display: flex; flex-wrap: wrap; gap: 6px;"></div>
                 </div>
             </div>
         </div>
@@ -298,6 +298,7 @@
 
 </body>
 </html>
+
 
 
 
