@@ -210,7 +210,45 @@
             }
         }
 
-        window.onload = function() { renderPlayerGrid(); updateMvpDisplay(); };
+               // Save tools to keep your admin edits active!
+        function saveLeagueData() {
+            localStorage.setItem('satoliya_match_teams', document.getElementById('display-teams').innerText);
+            localStorage.setItem('satoliya_match_schedule', document.getElementById('display-schedule').innerText);
+            localStorage.setItem('satoliya_news', document.getElementById('live-news-ticker').innerText);
+            localStorage.setItem('satoliya_mvp_data', JSON.stringify(currentMvp));
+        }
+
+        // Overwriting default submit functions to auto-save to memory
+        const oldUpdateSchedule = updateSchedule;
+        updateSchedule = function() {
+            oldUpdateSchedule();
+            saveLeagueData();
+        };
+
+        const oldSubmitNewMvp = submitNewMvp;
+        submitNewMvp = function() {
+            oldSubmitNewMvp();
+            saveLeagueData();
+        };
+
+        const oldSubmitNewNews = submitNewNews;
+        submitNewNews = function() {
+            oldSubmitNewNews();
+            saveLeagueData();
+        };
+
+        // Load the saved data the exact second you open the web page
+        window.onload = function() {
+            if (localStorage.getItem('satoliya_match_teams')) document.getElementById('display-teams').innerText = localStorage.getItem('satoliya_match_teams');
+            if (localStorage.getItem('satoliya_match_schedule')) document.getElementById('display-schedule').innerText = localStorage.getItem('satoliya_match_schedule');
+            if (localStorage.getItem('satoliya_news')) document.getElementById('live-news-ticker').innerText = localStorage.getItem('satoliya_news');
+            if (localStorage.getItem('satoliya_mvp_data')) {
+                currentMvp = JSON.parse(localStorage.getItem('satoliya_mvp_data'));
+            }
+            renderPlayerGrid(); 
+            updateMvpDisplay(); 
+        };
+
     </script>
 </head>
 <body style="background-color: #111827; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0;">
