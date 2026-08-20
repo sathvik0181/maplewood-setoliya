@@ -4,31 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maplewood Park Satoliya League</title>
-    <!-- Updated working script layer for the design styles -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://jsdelivr.net"></script>
 </head>
 <body style="background-color: #111827; color: #f3f4f6; font-family: sans-serif; margin: 0; padding: 0;">
 
-    <!-- Navigation Bar -->
-    <nav style="background-color: #1f2937; border-bottom: 1px solid #374151; padding: 12px; position: sticky; top: 0; z-index: 50;">
-        <div style="max-w: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-between: space-between; align-items: center;">
-            <span style="font-size: 20px; font-weight: 900; color: #f97316; tracking-wider: 0.05em;">MAPLEWOOD SATOLIYA</span>
+    <!-- Fixed Structural Navigation Bar -->
+    <nav style="background-color: #1f2937; border-b: 1px solid #374151; padding: 16px; position: relative; z-index: 100;">
+        <div style="max-w: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <span style="font-size: 20px; font-weight: 900; color: #f97316; letter-spacing: 0.05em;">MAPLEWOOD SATOLIYA</span>
             <div style="display: flex; gap: 8px;">
-                <button onclick="switchTab('home')" id="tab-home" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer;">Home & Rules</button>
-                <button onclick="switchTab('stats')" id="tab-stats" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Leaderboards</button>
-                <button onclick="switchTab('admin')" id="tab-admin" style="padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Admin Panel</button>
+                <button onclick="switchTab('home')" id="tab-home" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer; transition: 0.2s;">Home & Rules</button>
+                <button onclick="switchTab('stats')" id="tab-stats" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer; transition: 0.2s;">Leaderboards</button>
+                <button onclick="switchTab('admin')" id="tab-admin" style="padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer; transition: 0.2s;">Admin Panel</button>
             </div>
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <header style="background: linear-gradient(to bottom, #ea580c, #d97706); padding: 40px 16px; text-align: center;">
+    <!-- Header Banner -->
+    <header style="background: linear-gradient(to bottom, #ea580c, #d97706); padding: 48px 16px; text-align: center; position: relative; z-index: 10;">
         <h1 style="font-size: 40px; font-weight: 800; margin: 0; color: white; text-transform: uppercase;">Maplewood Satoliya Hub</h1>
-        <p style="color: #ffedd5; margin-top: 8px; font-weight: 500;">Welcome to our local community's traditional street game league!</p>
+        <p style="color: #ffedd5; margin-top: 8px; font-weight: 500; margin-bottom: 0;">Welcome to our local community's traditional street game league!</p>
     </header>
 
-    <!-- Info Banners -->
-    <div style="max-w: 1100px; margin: -24px auto 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; position: relative; z-index: 10;">
+    <!-- Match Information Panels -->
+    <div style="max-w: 1100px; margin: -24px auto 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; position: relative; z-index: 20;">
         <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);">
             <span style="background-color: #f97316; color: white; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">Next Fixture</span>
             <h2 id="display-teams" style="font-size: 20px; font-weight: bold; margin: 8px 0 0 0; color: white;">Team Thunder vs. Team Cyclone</h2>
@@ -41,22 +40,22 @@
         </div>
     </div>
 
-    <!-- TAB 1: HOME PAGE & RULES -->
+    <!-- TAB 1: HOME PAGE -->
     <main id="view-home" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: block;">
         <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151; margin-bottom: 32px;">
-            <h2 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin-top: 0;">Welcome to our Satoliya League!</h2>
-            <p style="color: #d1d5db; line-height: 1.6;">
+            <h2 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin-top: 0; margin-bottom: 12px;">Welcome to our Satoliya League!</h2>
+            <p style="color: #d1d5db; line-height: 1.6; margin: 0 0 16px 0;">
                 What started a few years ago as a fun weekend gathering has grown into an incredible local community tradition! 
                 <strong>Satoliya</strong> (also known as Pithu or Seven Stones) is an ancient, action-packed street game from India that balances strategy, running, accuracy, and quick teamwork. 
             </p>
-            <p style="color: #d1d5db; line-height: 1.6;">
+            <p style="color: #d1d5db; line-height: 1.6; margin: 0;">
                 Whether you are a seasoned veteran aiming for the top of our leaderboard, or a beginner looking to join our friendly matches, there is a place for you here. We play regular games right here in the community. Come down to meet the players, experience the culture, and jump into the action!
             </p>
         </section>
 
         <section style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
-            <h2 style="font-size: 24px; font-weight: 900; color: #f97316; border-bottom: 1px solid #374151; padding-bottom: 12px; margin-top: 0;">How To Play: The Official Rules</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; margin-top: 16px;">
+            <h2 style="font-size: 24px; font-weight: 900; color: #f97316; border-bottom: 1px solid #374151; padding-bottom: 12px; margin-top: 0; margin-bottom: 16px;">How To Play: The Official Rules</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px;">
                 <div>
                     <h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 8px 0;">1. Setup & Teams</h3>
                     <p style="color: #d1d5db; line-height: 1.5; margin: 0;">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into two squads: Seekers and Hitters.</p>
@@ -80,12 +79,12 @@
     <!-- TAB 2: LEADERBOARDS -->
     <section id="view-stats" style="max-w: 1100px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
         <div style="background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151;">
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;">
                 <div>
                     <h3 style="font-size: 24px; font-weight: bold; color: #fbbf24; margin: 0;">Player Leaderboard</h3>
                     <p style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Sort metrics to showcase field specialists.</p>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                     <button onclick="sortData('stones')" id="sort-stones" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #ea580c; color: white; border: none; cursor: pointer;">Stones Stacked</button>
                     <button onclick="sortData('accuracy')" id="sort-accuracy" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Accuracy</button>
                     <button onclick="sortData('evaded')" id="sort-evaded" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer;">Hits Evaded</button>
@@ -93,18 +92,18 @@
             </div>
 
             <div style="overflow-x: auto; border-radius: 8px; border: 1px solid #374151;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; min-width: 500px;">
                     <thead>
                         <tr style="background-color: #374151; color: #d1d5db; text-transform: uppercase; font-size: 12px;">
-                            <th style="padding: 12px; text-align: center;">Rank</th>
+                            <th style="padding: 12px; text-align: center; width: 80px;">Rank</th>
                             <th style="padding: 12px;">Player / Position</th>
-                            <th style="padding: 12px; text-align: center;">Stones</th>
-                            <th style="padding: 12px; text-align: center;">Accuracy</th>
-                            <th style="padding: 12px; text-align: center;">Evaded</th>
+                            <th style="padding: 12px; text-align: center; width: 100px;">Stones</th>
+                            <th style="padding: 12px; text-align: center; width: 100px;">Accuracy</th>
+                            <th style="padding: 12px; text-align: center; width: 100px;">Evaded</th>
                         </tr>
                     </thead>
                     <tbody id="leaderboard-table">
-                        <!-- Dynamically filled rows -->
+                        <!-- Filled by JS -->
                     </tbody>
                 </table>
             </div>
@@ -113,7 +112,7 @@
 
     <!-- TAB 3: ADMIN PANEL -->
     <section id="view-admin" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
-        <!-- Auth Screen -->
+
 
 
         
