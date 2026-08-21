@@ -6,37 +6,61 @@
     <title>Maplewood Park Satoliya League</title>
     <style>
         body { 
-            background-image: linear-gradient(rgba(17, 24, 39, 0.94), rgba(17, 24, 39, 0.94)), url('https://unsplash.com') !important; 
-            background-size: cover !important; 
-            background-position: center !important; 
-            background-attachment: fixed !important; 
-            color: #f3f4f6; 
+            background-color: #ffffff;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.92)), url('https://unsplash.com');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #111827; 
             font-family: sans-serif; 
             margin: 0; 
             padding: 0;
         }
+        
+        /* 🌈 Custom CSS Graphic: 7-Stone Rainbow Satoliya Pyramid Diagram */
+        .satoliya-tower-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 300px;
+            background: rgba(243, 244, 246, 0.6);
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+        }
+        .stone { border-radius: 4px; margin: 3px 0; height: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stone-1 { width: 20px;  height: 20px; background-color: #ef4444; border-radius: 3px; } /* Red Square */
+        .stone-2 { width: 50px;  background-color: #f97316; } /* Orange */
+        .stone-3 { width: 80px;  background-color: #eab308; } /* Yellow */
+        .stone-4 { width: 110px; background-color: #22c55e; } /* Green */
+        .stone-5 { width: 140px; background-color: #3b82f6; } /* Blue */
+        .stone-6 { width: 170px; background-color: #4f46e5; } /* Indigo */
+        .stone-7 { width: 200px; background-color: #7c3aed; } /* Violet */
+
         nav { background-color: #1f2937; border-bottom: 1px solid #374151; padding: 16px; position: sticky; top: 0; z-index: 50; }
         .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .nav-btn { padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: bold; background-color: #374151; color: #d1d5db; border: none; cursor: pointer; transition: 0.2s; }
         .nav-btn.active { background-color: #ea580c; color: white; }
-        header { background: linear-gradient(to bottom, #ea580c, #d97706); padding: 40px 16px; text-align: center; }
+        header { background: linear-gradient(to bottom, #ea580c, #d97706); padding: 40px 16px; text-align: center; color: white; }
         .hero-badge-grid { max-width: 1100px; margin: -24px auto 0 auto; padding: 0 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; position: relative; z-index: 10; }
-        .hero-card { background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
-        .panel-card { background-color: #1f2937; padding: 24px; border-radius: 12px; border: 1px solid #374151; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        input, textarea, select { width: 100%; background-color: #111827; color: white; border: 1px solid #374151; border-radius: 8px; padding: 10px; font-size: 14px; outline: none; box-sizing: border-box; resize: none; margin-bottom: 12px; }
-        label { display: block; font-size: 12px; font-weight: bold; color: #9ca3af; text-transform: uppercase; margin-bottom: 4px; }
-        button.action-btn { background-color: #ea580c; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; transition: 0.2s; }
-        button.action-btn:hover { opacity: 0.9; }
+        .hero-card { background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .panel-card { background-color: #ffffff; padding: 24px; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+        .player-card { background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 4px 6px rgba(0,0,0,0.02); position: relative; }
+        .badge { display: inline-block; font-size: 11px; background-color: #f3f4f6; color: #4b5563; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 600; text-transform: uppercase; }
+        .badge-allrounder { background-color: #fef3c7; color: #d97706; }
+        .badge-striker { background-color: #fee2e2; color: #dc2626; }
+        .badge-catcher { background-color: #e0f2fe; color: #0284c7; }
+        .badge-mvp { background-color: #fef9c3; color: #ca8a04; border: 1px solid #facd15; font-weight: 800; }
+        .player-card.mvp-card { border: 2px solid #eab308; box-shadow: 0 0 15px rgba(234,179,8,0.2); }
     </style>
 </head>
 <body>
 
-    <!-- Live Game Ticker Notification Banner Layer -->
-    <div id="live-match-alert-ticker" style="display: none; background-color: #ef4444; color: white; text-align: center; padding: 10px; font-weight: 900; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase;">
-        ⚡ LIVE GAME RUNNING NOW AT MAPLEWOOD PARK ⚡
-    </div>
-
-    <!-- Top Navigation -->
+    <!-- Top Navigation Bar Menu -->
     <nav>
         <div class="nav-container">
             <span style="font-size: 20px; font-weight: 900; color: #f97316;">MAPLEWOOD SATOLIYA</span>
@@ -44,191 +68,144 @@
                 <button onclick="switchTab('home')" id="tab-home" class="nav-btn active">Home & Rules</button>
                 <button onclick="switchTab('players')" id="tab-players" class="nav-btn">Players Directory</button>
                 <button onclick="switchTab('match')" id="tab-match" class="nav-btn">Current Match</button>
-                <button onclick="switchTab('admin')" id="tab-admin" class="nav-btn">Admin Panel</button>
             </div>
         </div>
     </nav>
 
-    <!-- Header Hero Banner -->
+    <!-- Header Hero Banner Layout -->
     <header>
-        <h1 style="font-size: 40px; font-weight: 800; margin: 0; color: white; text-transform: uppercase;">Maplewood Satoliya Hub</h1>
+        <h1 style="font-size: 40px; font-weight: 800; margin: 0; text-transform: uppercase;">Maplewood Satoliya Hub</h1>
         <p style="color: #ffedd5; margin-top: 8px; font-weight: 500;">Welcome to our local community's traditional street game league!</p>
     </header>
 
-    <!-- Stat Dashboard Badges -->
+    <!-- Stat Dashboard Badges Block -->
     <div class="hero-badge-grid">
         <div class="hero-card">
-            <span style="background-color: #f97316; color: white; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">Next Fixture</span>
-            <h2 id="display-teams" style="font-size: 20px; font-weight: bold; margin: 8px 0 0 0; color: white;">Team Alpha vs. Team Omega</h2>
-            <p id="display-schedule" style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Sunday at 4:00 PM | Field: Maplewood Park</p>
+            <span style="background-color: #f97316; color: white; font-size: 12px; font-weight: bold; padding: 2px 8px; border-radius: 9999px; text-transform: uppercase;">League Coordinates</span>
+            <h2 style="font-size: 20px; font-weight: bold; margin: 8px 0 0 0; color: #111827;">Maplewood Park Fields</h2>
+            <p style="color: #4b5563; font-size: 14px; margin: 4px 0 0 0;">Weekend Gatherings | Main Field near the pavilions</p>
         </div>
         <div class="hero-card" style="text-align: center; display: flex; flex-direction: column; justify-content: center;">
-            <span style="color: #9ca3af; font-size: 12px; font-weight: bold; text-transform: uppercase;">Active Leaguers</span>
-            <div id="player-count-badge" style="font-size: 36px; font-weight: 900; color: #fbbf24; margin-top: 4px;">27</div>
+            <span style="color: #4b5563; font-size: 12px; font-weight: bold; text-transform: uppercase;">Active Leaguers</span>
+            <div style="font-size: 36px; font-weight: 900; color: #ea580c; margin-top: 4px;">29</div>
             <span style="font-size: 12px; color: #6b7280; margin-top: 2px;">Official League Roster</span>
         </div>
     </div>
-    <!-- TAB 1: HOME PAGE -->
+
+    <!-- VIEW 1: HOME PAGE TAB -->
     <main id="view-home" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: block;">
-        <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border-left: 4px solid #38bdf8; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 24px;">
-            <h3 style="font-size: 14px; font-weight: bold; color: #38bdf8; text-transform: uppercase; margin: 0 0 4px 0;">📢 Satoliya News Bulletin</h3>
-            <p id="live-news-ticker" style="color: #d1d5db; font-size: 14px; line-height: 1.6; margin: 0;">All clear! Standard weekend pickup games are currently active at Maplewood Park. Come down ready to play!</p>
-        </div>
-
         <section class="panel-card">
-            <h2 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin-top: 0; margin-bottom: 12px;">Welcome to our Satoliya League!</h2>
-            <p style="color: #d1d5db; line-height: 1.6; margin: 0 0 16px 0;">What started a few years ago as a fun weekend gathering has grown into an incredible local community tradition! <strong>Satoliya</strong> is an action-packed street game that balances strategy, running, accuracy, and quick teamwork.</p>
-            <p style="color: #d1d5db; line-height: 1.6; margin: 0;">We play regular games right here in the community at Maplewood Park. Come down to meet the players, experience the culture, and jump into the action!</p>
+            <h2 style="font-size: 24px; font-weight: 900; color: #ea580c; margin-top: 0; margin-bottom: 12px;">Welcome to our Satoliya League!</h2>
+            <p style="color: #374151; line-height: 1.6; margin: 0 0 16px 0;">What started as a fun weekend gathering has grown into an incredible local community tradition! <strong>Satoliya</strong> is an action-packed street game that balances strategy, running, accuracy, and quick teamwork.</p>
+            <p style="color: #374151; line-height: 1.6; margin: 0;">We play regular games right here in the community at Maplewood Park. Come down to meet the players, experience the culture, and jump into the action!</p>
+            
+            <!-- 🌈 CSS Graphic Pyramid Integration -->
+            <div class="satoliya-tower-container">
+                <div style="font-size: 11px; font-weight: bold; color: #6b7280; margin-bottom: 8px; text-transform: uppercase;">7-Stone Rainbow Tower</div>
+                <div class="stone stone-1"></div>
+                <div class="stone stone-2"></div>
+                <div class="stone stone-3"></div>
+                <div class="stone stone-4"></div>
+                <div class="stone stone-5"></div>
+                <div class="stone stone-6"></div>
+                <div class="stone stone-7"></div>
+            </div>
         </section>
-
-        <!-- MVP Weekly Showcase Display Frame -->
-        <section style="background: linear-gradient(to right, rgba(217,119,6,0.15), rgba(234,88,12,0.1), rgba(217,119,6,0.15)); padding: 24px; border-radius: 12px; border: 2px solid rgba(245,158,11,0.4); text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); margin-bottom: 32px;">
-            <div style="display: inline-block; background-color: #f59e0b; color: #111827; font-size: 12px; font-weight: 900; text-transform: uppercase; padding: 4px 12px; border-radius: 9999px; margin-bottom: 12px;">🏆 MVP of the Week 🏆</div>
-            <h3 id="mvp-card-name" style="font-size: 30px; font-weight: 900; color: white; margin: 0;">Saanvi</h3>
-            <p id="mvp-card-style" style="font-size: 14px; font-weight: 600; color: #fde047; text-transform: uppercase; margin: 4px 0 0 0;">Striker</p>
-            <div style="max-w: 600px; margin: 16px auto 0 auto; background-color: rgba(17,24,39,0.6); padding: 16px; border-radius: 12px; border: 1px solid rgba(55,65,81,0.5);">
-                <p id="mvp-card-reason" style="color: #d1d5db; font-style: italic; font-size: 15px; line-height: 1.6; margin: 0;">"Dominated the field as Striker, destroying the stone tower in three consecutive rounds!"</p>
+        <!-- Permanent MVP Showcase Card (Edit these names directly on GitHub to swap winners!) -->
+        <section style="background: linear-gradient(to right, rgba(234,88,12,0.05), rgba(217,119,6,0.03), rgba(234,88,12,0.05)); padding: 24px; border-radius: 12px; border: 2px solid #eab308; text-align: center; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.02); margin-bottom: 32px;">
+            <div style="display: inline-block; background-color: #eab308; color: #111827; font-size: 12px; font-weight: 900; text-transform: uppercase; padding: 4px 12px; border-radius: 9999px; margin-bottom: 12px;">🏆 MVP of the Week 🏆</div>
+            <h3 style="font-size: 30px; font-weight: 900; color: #111827; margin: 0;">Saanvi</h3>
+            <p style="font-size: 14px; font-weight: 600; color: #ca8a04; text-transform: uppercase; margin: 4px 0 0 0;">Striker</p>
+            <div style="max-w: 600px; margin: 16px auto 0 auto; background-color: #f9fafb; padding: 16px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                <p style="color: #374151; font-style: italic; font-size: 15px; line-height: 1.6; margin: 0;">"Dominated the field as Striker, destroying the stone tower in three consecutive rounds!"</p>
             </div>
         </section>
 
-        <!-- Rulebook Card Set -->
+        <!-- Rulebook Card Deck Section -->
         <section class="panel-card">
-            <h2 style="font-size: 24px; font-weight: 900; color: #f97316; border-bottom: 1px solid #374151; padding-bottom: 12px; margin-top: 0; margin-bottom: 16px;">How To Play: The Official Rules</h2>
+            <h2 style="font-size: 24px; font-weight: 900; color: #ea580c; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; margin-top: 0; margin-bottom: 16px;">How To Play: The Official Rules</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; font-size: 14px;">
-                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">1. Setup & Teams</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into squads: Seekers and Hitters.</p></div>
-                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">2. The Opening Throw</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances.</p></div>
-                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">3. Rebuilding the Tower</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">Once the stones fall, Seekers must rush to stack them back up in order. Hitters retrieve the ball and try to tag them out below the shoulders.</p></div>
-                <div><h3 style="font-size: 16px; font-weight: bold; color: #fbbf24; margin: 0 0 6px 0;">4. Winning a Round</h3><p style="color: #d1d5db; line-height: 1.5; margin: 0;">If Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #eab308; margin: 0 0 6px 0;">1. Setup & Teams</h3><p style="color: #4b5563; line-height: 1.5; margin: 0;">We pile up 7 flat stones from largest to smallest at the center of the field. Players are divided cleanly into squads: Seekers and Hitters.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #eab308; margin: 0 0 6px 0;">2. The Opening Throw</h3><p style="color: #4b5563; line-height: 1.5; margin: 0;">A Seeker stands behind the line and throws a tennis ball to knock down the stone pile. They get three chances.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #eab308; margin: 0 0 6px 0;">3. Rebuilding the Tower</h3><p style="color: #4b5563; line-height: 1.5; margin: 0;">Once the stones fall, Seekers must rush to stack them back up in order. Hitters retrieve the ball and try to tag them out below the shoulders.</p></div>
+                <div><h3 style="font-size: 16px; font-weight: bold; color: #eab308; margin: 0 0 6px 0;">4. Winning a Round</h3><p style="color: #4b5563; line-height: 1.5; margin: 0;">If Seekers successfully rebuild the pile, they shout <strong>"Satoliya!"</strong> and score 1 point.</p></div>
             </div>
         </section>
     </main>
-    <!-- TAB 2: PLAYERS DIRECTORY PAGE -->
-    <section id="view-players" style="max-w: 1100px; margin: 32px auto 64px auto; padding: 0 16px; display: none;"> 
+
+    <!-- VIEW 2: PLAYERS DIRECTORY TAB -->
+    <main id="view-players" style="max-w: 1100px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
         <div style="margin-bottom: 24px;"> 
-            <h3 style="font-size: 24px; font-weight: 900; color: #fbbf24; margin: 0;">Players Directory</h3> 
-            <p style="color: #9ca3af; font-size: 14px; margin: 4px 0 0 0;">Meet the active community members of our Maplewood Park league.</p> 
-        </div> 
-        <div id="player-profile-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;"></div> 
-    </section> 
+            <h3 style="font-size: 24px; font-weight: 900; color: #ea580c; margin: 0;">Players Directory</h3> 
+            <p style="color: #4b5563; font-size: 14px; margin: 4px 0 0 0;">Meet the active community members of our Maplewood Park league.</p> 
+        </div>
+        <div class="profile-grid">
+            <!-- Player Cards Grid (All 29 Core Leaguers Hardcoded) -->
+            <div class="player-card mvp-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Saanvi</h4><span class="badge badge-mvp">👑 WEEKLY MVP / Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Sathvik</h4><span class="badge badge-catcher">Center Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Jeevan</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Jahnvi</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Sri</h4><span class="badge">Beginner</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Raghu</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Abishiek</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Deepika</h4><span class="badge">Beginner</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Arhan</h4><span class="badge badge-catcher">Center Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Shanti</h4><span class="badge">Beginner</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Sudhir</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Sriram</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Gyathri</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Viraj</h4><span class="badge badge-catcher">Side Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Rajvi</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Vijay.S</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Jothi</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Vaani</h4><span class="badge badge-catcher">Back Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Srihan</h4><span class="badge badge-catcher">Back Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Priyanka</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Vinay</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Sunil</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Julie</h4><span class="badge badge-catcher">Side Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Krisha</h4><span class="badge badge-catcher">Center Catcher</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Veeksha</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Divya</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Vijay.T</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Anu</h4><span class="badge badge-striker">Striker</span></div>
+            <div class="player-card"><h4 style="font-size: 18px; font-weight: bold; margin: 0;">Murali</h4><span class="badge badge-allrounder">All-Rounder</span></div>
+        </div>
+    </main>
 
-    <!-- TAB 3: CURRENT MATCH GENERATOR -->
-    <section id="view-match" style="max-w: 900px; margin: 32px auto 64px auto; padding: 0 16px; display: none;"> 
-        <div class="panel-card"> 
-            <h3 style="font-size: 22px; font-weight: bold; color: #ea580c; margin-top: 0; margin-bottom: 4px;">Smart Match Team Randomizer</h3> 
-            <p style="color: #9ca3af; font-size: 14px; margin-bottom: 20px;">Check off exactly who showed up at the park today to generate balanced squads.</p> 
-            <div id="match-attendance-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-height: 300px; overflow-y: auto; padding: 8px; background-color: rgba(17,24,39,0.4); border-radius: 8px; border: 1px solid #374151; margin-bottom: 20px;"></div> 
-            <button onclick="generateBalancedTeams()" style="background-color: #ea580c; color: white; font-weight: bold; padding: 12px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px;">Generate Balanced Squads</button> 
-            
-            <div id="generated-teams-box" style="display: none; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; padding-top: 24px; border-top: 1px solid #374151;"> 
-                <div style="background-color: rgba(234,88,12,0.05); border: 2px solid #ea580c; border-radius: 12px; padding: 20px;"> 
-                    <h4 style="font-size: 18px; font-weight: 900; color: #ea580c; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid rgba(234,88,12,0.3); padding-bottom: 6px;">🍊 Team Alpha</h4> 
-                    <div id="team-a-roster" style="display: flex; flex-direction: column; gap: 6px;"></div> 
-                </div> 
-                <div style="background-color: rgba(251,191,36,0.05); border: 2px solid #fbbf24; border-radius: 12px; padding: 20px;"> 
-                    <h4 style="font-size: 18px; font-weight: 900; color: #fbbf24; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid rgba(251,191,36,0.3); padding-bottom: 6px;">👑 Team Omega</h4> 
-                    <div id="team-b-roster" style="display: flex; flex-direction: column; gap: 6px;"></div> 
-                </div> 
-            </div> 
-        </div> 
-    </section> 
-    <!-- TAB 4: ADMIN CONSOLE SUITE --> 
-    <section id="view-admin" style="max-w: 800px; margin: 32px auto 64px auto; padding: 0 16px; display: none;"> 
-        <!-- Gatekeeper Authentication Shield -->
-        <div id="admin-auth" style="background-color: #1f2937; padding: 32px; border-radius: 12px; border: 1px solid #374151; text-align: center; max-w: 400px; margin: 0 auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);"> 
-            <h2 style="font-size: 20px; font-weight: bold; margin-top: 0; margin-bottom: 16px;">Sathvik's Admin Access</h2> 
-            <input type="password" id="admin-pass" placeholder="Enter Admin Password"> 
-            <button onclick="checkAuth()" style="width: 100%; background-color: #ea580c; color: white; font-weight: bold; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px; box-sizing: border-box;">Login Dashboard</button> 
-        </div> 
-
-        <!-- Secure Dashboard Payload Container -->
-        <div id="admin-dashboard" style="display: none; flex-direction: column; gap: 24px; max-w: 600px; margin: 0 auto;"> 
-            <div class="panel-card"> 
-                <h3 style="font-size: 18px; font-weight: bold; color: #ef4444; margin-top: 0; margin-bottom: 12px;">⚡ Live Game Ticker Notification Control</h3> 
-                <p style="color: #9ca3af; font-size: 12px; margin-bottom: 16px;">Turn the main home page match warning box on or off for spectators.</p> 
-                <div style="display: flex; gap: 12px;"> 
-                    <button onclick="toggleLiveGame(true)" style="background-color: #ef4444; color: white; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">Start Live Game</button> 
-                    <button onclick="toggleLiveGame(false)" style="background-color: #374151; color: #d1d5db; font-weight: bold; padding: 10px 16px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px;">End Live Game</button> 
-                </div> 
-            </div> 
-
-            <div class="panel-card"> 
-                <h3 style="font-size: 18px; font-weight: bold; color: #38bdf8; margin-top: 0; margin-bottom: 16px;">📢 Broadcast Satoliya News</h3> 
-                <textarea id="input-news-text" rows="3" placeholder="e.g. Weather Alert: High chance of rain. Moving matches to the indoor gym today!"></textarea> 
-                <button onclick="submitNewNews()" class="action-btn" style="background-color: #0284c7;">Publish News Alert</button> 
-            </div> 
-
-            <div class="panel-card"> 
-                <h3 style="font-size: 18px; font-weight: bold; color: #fbbf24; margin-top: 0; margin-bottom: 16px;">👑 Crowning the Weekly MVP</h3> 
-                <div style="display: flex; flex-direction: column; gap: 12px;"> 
-                    <div> 
-                        <label>Select League Member</label> 
-                        <select id="input-mvp-name"></select> 
-                    </div> 
-                    <div> 
-                        <label>MVP Highlight Reason</label> 
-                        <textarea id="input-mvp-reason" rows="3" placeholder="Explain their clutch highlight play..."></textarea> 
-                    </div> 
-                </div> 
-                <button onclick="submitNewMvp()" class="action-btn" style="background-color: #d97706; margin-top: 12px;">Announce Weekly MVP</button> 
-            </div> 
-
-            <div class="panel-card"> 
-                <h3 style="font-size: 18px; font-weight: bold; color: #f97316; margin-top: 0; margin-bottom: 16px;">Update Next Match Schedule</h3> 
-                <div style="display: flex; flex-direction: column; gap: 12px;"> 
-                    <input type="text" id="input-teams" placeholder="e.g. Sathvik's Squad vs Saanvi's Strikers"> 
-                    <input type="text" id="input-schedule" placeholder="e.g. Saturday at 5:00 PM"> 
-                </div> 
-                <button onclick="updateSchedule()" class="action-btn" style="background-color: #059669; margin-top: 12px;">Update Display Banner</button> 
-            </div> 
-
-            <div class="panel-card"> 
-                <h3 style="font-size: 18px; font-weight: bold; color: white; margin-top: 0; margin-bottom: 16px;">Roster League Management</h3> 
-                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;"> 
-                    <input type="text" id="new-name" placeholder="Full Name" style="flex: 1; min-width: 150px; margin-bottom: 0;"> 
-                    <select id="new-style" style="flex: 1; min-width: 150px; margin-bottom: 0;"> 
-                        <option value="Center Catcher">Center Catcher</option> 
-                        <option value="Side Catcher">Side Catcher</option> 
-                        <option value="Back Catcher">Back Catcher</option> 
-                        <option value="Striker">Striker</option> 
-                        <option value="All-Rounder">All-Rounder</option> 
-                        <option value="Beginner">Beginner</option> 
-                    </select> 
-                    <button onclick="addNewPlayer()" class="action-btn">Add To League</button> 
-                </div> 
-                <div style="border-top: 1px solid #374151; padding-top: 16px;"> 
-                    <p style="font-size: 12px; color: #9ca3af; margin-bottom: 8px;">Current Members (Click to remove from league completely):</p> 
-                    <div id="admin-delete-list" style="display: flex; flex-wrap: wrap; gap: 6px;"></div> 
-                </div> 
-            </div> 
-        </div> 
-    </section>
+    <!-- VIEW 3: MATCH RANDOMIZER TAB -->
+    <main id="view-match" style="max-w: 900px; margin: 32px auto 64px auto; padding: 0 16px; display: none;">
+        <div class="panel-card">
+            <h3 style="font-size: 22px; font-weight: bold; color: #ea580c; margin-top: 0; margin-bottom: 4px;">Smart Match Team Randomizer</h3>
+            <p style="color: #4b5563; font-size: 14px; margin-bottom: 20px;">Check off exactly who showed up at the park today to generate balanced squads.</p>
+                        <!-- Interactive Attendance Form Grid -->
+            <div id="match-attendance-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; max-height: 300px; overflow-y: auto; padding: 12px; background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Sathvik <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Center Catcher)</span></span><input type="checkbox" class="park-attendance" data-name="Sathvik" data-style="Center Catcher" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Saanvi <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Saanvi" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Jeevan <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Jeevan" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Jahnvi <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Jahnvi" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Sri <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Beginner)</span></span><input type="checkbox" class="park-attendance" data-name="Sri" data-style="Beginner" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Raghu <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Raghu" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Abishiek <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Abishiek" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Deepika <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Beginner)</span></span><input type="checkbox" class="park-attendance" data-name="Deepika" data-style="Beginner" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Arhan <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Center Catcher)</span></span><input type="checkbox" class="park-attendance" data-name="Arhan" data-style="Center Catcher" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Shanti <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Beginner)</span></span><input type="checkbox" class="park-attendance" data-name="Shanti" data-style="Beginner" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Sudhir <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Sudhir" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Sriram <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Sriram" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Gyathri <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Gyathri" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Viraj <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Side Catcher)</span></span><input type="checkbox" class="park-attendance" data-name="Viraj" data-style="Side Catcher" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Rajvi <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Rajvi" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Vijay.S <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Vijay.S" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Jothi <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Jothi" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Vaani <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Back Catcher)</span></span><input type="checkbox" class="park-attendance" data-name="Vaani" data-style="Back Catcher" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Srihan <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Back Catcher)</span></span><input type="checkbox" class="park-attendance" data-name="Srihan" data-style="Back Catcher" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Priyanka <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(Striker)</span></span><input type="checkbox" class="park-attendance" data-name="Priyanka" data-style="Striker" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 6px; cursor: pointer;"><span style="font-weight: bold; font-size: 14px;">Vinnay <span style="font-size: 10px; color: #6b7280; font-weight: normal;">(All-Rounder)</span></span><input type="checkbox" class="park-attendance" data-name="Vinnay" data-style="All-Rounder" checked style="width: 18px; height: 18px; accent-color: #ea580c;"></label>
+    <!-- Master JavaScript Engine Script Frame Layer -->
     <script>
-        // Complete 27-Player Master League Roster Database Array
-        let players = [
-            { name: "Sathvik", style: "Center Catcher" }, { name: "Saanvi", style: "Striker" },
-            { name: "Sri", style: "Beginner" }, { name: "Raghu", style: "All-Rounder" },
-            { name: "Abishiek", style: "All-Rounder" }, { name: "Deepika", style: "Beginner" },
-            { name: "Arhan", style: "Center Catcher" }, { name: "Shanti", style: "Beginner" },
-            { name: "Sudhir", style: "All-Rounder" }, { name: "Sriram", style: "Striker" },
-            { name: "Gyathri", style: "Striker" }, { name: "Viraj", style: "Side Catcher" },
-            { name: "Rajvi", style: "Striker" }, { name: "Vijay.S", style: "All-Rounder" },
-            { name: "Jothi", style: "Striker" }, { name: "Vaani", style: "Back Catcher" },
-            { name: "Srihan", style: "Back Catcher" }, { name: "Priyanka", style: "Striker" },
-            { name: "Vinnay", style: "All-Rounder" }, { name: "Sunil", style: "All-Rounder" },
-            { name: "Julie", style: "Side Catcher" }, { name: "Krisha", style: "Center Catcher" },
-            { name: "Veeksha", style: "Striker" }, { name: "Divya", style: "Striker" },
-            { name: "Vijay.T", style: "All-Rounder" }, { name: "Anu", style: "Striker" },
-            { name: "Murali", style: "All-Rounder" }
-        ];
-
-        let currentMvp = { name: "Saanvi", reason: "Dominated the field as Striker, destroying the stone tower in three consecutive rounds!" };
-        
-        const BUCKET_KEY = "maplewood_satoliya_v3";
-        const API_URL = `https://kvdb.io{BUCKET_KEY}`;
-
-        // View Shifter Page Manager Routing Switch
+        // Tab Router View Switch Engine
         function switchTab(target) {
-            ['home', 'players', 'match', 'admin'].forEach(tab => {
+            ['home', 'players', 'match'].forEach(tab => {
                 const view = document.getElementById(`view-${tab}`);
                 if (view) view.style.display = tab === target ? "block" : "none";
                 const btn = document.getElementById(`tab-${tab}`);
@@ -237,28 +214,30 @@
                     else btn.classList.remove('active');
                 }
             });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Live Dynamic Ticker Control System
-        async function toggleLiveGame(status) {
-            document.getElementById('live-match-alert-ticker').style.display = status ? 'block' : 'none';
-            await saveToCloud();
-            saveToLocalBackup();
-            alert(status ? "Live Game ticker broadcasted to everyone globally!" : "Live Game ticker ended globally!");
-        }
-        // Smart Match Generator with Split Balancing Logic
+        // Static Split Role-Balancing Randomizer Engine
         function generateBalancedTeams() {
             let presentPlayers = [];
-            players.forEach((p, idx) => {
-                const checkbox = document.getElementById(`check-present-${idx}`);
-                if (checkbox && checkbox.checked) presentPlayers.push(p);
+            const checkboxes = document.querySelectorAll('.park-attendance');
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    presentPlayers.push({
+                        name: checkbox.getAttribute('data-name'),
+                        style: checkbox.getAttribute('data-style')
+                    });
+                }
             });
 
             if (presentPlayers.length < 2) return alert("Check off at least 2 players!");
 
+            // Filter out core specialization roles
             let allRounders = presentPlayers.filter(p => p.style === "All-Rounder");
             let others = presentPlayers.filter(p => p.style !== "All-Rounder");
 
+            // Math shuffle implementation matrix
             let shuffle = (arr) => {
                 for (let i = arr.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
@@ -266,204 +245,44 @@
                 }
             };
 
-            shuffle(allRounders); shuffle(others);
+            shuffle(allRounders); 
+            shuffle(others);
 
             let teamA = [], teamB = [];
-            allRounders.forEach((p, i) => { if (i % 2 === 0) teamA.push(p); else teamB.push(p); });
-            others.forEach(p => { if (teamA.length <= teamB.length) teamA.push(p); else teamB.push(p); });
+            
+            // Allocate all-rounders evenly to split the skill floor
+            allRounders.forEach((p, i) => { 
+                if (i % 2 === 0) teamA.push(p); 
+                else teamB.push(p); 
+            });
+            
+            // Distribute remaining players evenly
+            others.forEach(p => { 
+                if (teamA.length <= teamB.length) teamA.push(p); 
+                else teamB.push(p); 
+            });
 
             const listA = document.getElementById('team-a-roster');
             const listB = document.getElementById('team-b-roster');
-            listA.innerHTML = ''; listB.innerHTML = '';
-
-            teamA.forEach(p => { listA.innerHTML += `<div style="background-color:#111827; padding:10px; border-radius:6px; font-weight:bold; font-size:14px; border:1px solid #374151;">${p.name} <span style="font-size:10px; color:#fdba74; float:right;">${p.style}</span></div>`; });
-            teamB.forEach(p => { listB.innerHTML += `<div style="background-color:#111827; padding:10px; border-radius:6px; font-weight:bold; font-size:14px; border:1px solid #374151;">${p.name} <span style="font-size:10px; color:#fdba74; float:right;">${p.style}</span></div>`; });
-
-            document.getElementById('generated-teams-box').style.display = 'grid';
-            saveToCloud();
-            saveToLocalBackup();
-        }
-
-        // Authentication Gateway Validation Gate
-        function checkAuth() {
-            if (document.getElementById('admin-pass').value === 'admin123') {
-                document.getElementById('admin-auth').style.display = 'none';
-                document.getElementById('admin-dashboard').style.display = 'flex';
-                renderAdminControls();
-            } else {
-                alert('Access Denied: Incorrect Admin Password');
-            }
-        }
-
-        // Roster Database Management and Clean Rooms
-        function renderAdminControls() {
-            const deleteContainer = document.getElementById('admin-delete-list');
-            if (!deleteContainer) return;
-            deleteContainer.innerHTML = '';
-            players.forEach((p, idx) => {
-                deleteContainer.innerHTML += `<button onclick="removePlayer(${idx})" style="background-color: #111827; border: 1px solid #7f1d1d; color: #9ca3af; padding: 6px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin: 2px;">${p.name} ×</button>`;
-            });
-        }
-
-        function addNewPlayer() {
-            const name = document.getElementById('new-name').value.trim();
-            const style = document.getElementById('new-style').value;
-            if (!name) return alert("Please enter player's full name.");
-            players.push({ name: name, style: style });
-            document.getElementById('new-name').value = '';
-            renderPlayerGrid(); renderAdminControls();
-            saveToCloud(); saveToLocalBackup();
-            alert(`${name} added to the Satoliya roster.`);
-        }
-
-        function removePlayer(index) {
-            if(confirm(`Are you sure you want to remove ${players[index].name}?`)) {
-                players.splice(index, 1);
-                renderPlayerGrid(); renderAdminControls();
-                saveToCloud(); saveToLocalBackup();
-            }
-        }
-        // Global Broadcast Dispatch Commands
-        async function updateSchedule() {
-            const teams = document.getElementById('input-teams').value;
-            const schedule = document.getElementById('input-schedule').value;
-            if (teams) document.getElementById('display-teams').innerText = teams;
-            if (schedule) document.getElementById('display-schedule').innerText = schedule;
-            await saveToCloud(); saveToLocalBackup();
-            alert("Match details updated and synced globally!");
-            switchTab('home');
-        }
-
-        async function submitNewMvp() {
-            currentMvp.name = document.getElementById('input-mvp-name').value;
-            currentMvp.reason = document.getElementById('input-mvp-reason').value.trim();
-            updateMvpDisplay(); renderPlayerGrid();
-            await saveToCloud(); saveToLocalBackup();
-            alert(`MVP successfully updated to ${currentMvp.name} and synced globally!`);
-            switchTab('home');
-        }
-
-        async function submitNewNews() {
-            const newsText = document.getElementById('input-news-text').value.trim();
-            if (document.getElementById('live-news-ticker')) document.getElementById('live-news-ticker').innerText = newsText;
-            await saveToCloud(); saveToLocalBackup();
-            alert("Satoliya News alert successfully broadcasted globally!");
-            switchTab('home');
-        }
-
-        // Interface Display Rendering Sub-Engines
-        function renderPlayerGrid() {
-            const grid = document.getElementById('player-profile-grid');
-            const attendanceList = document.getElementById('match-attendance-list');
-            if (!grid) return;
-            grid.innerHTML = ''; if (attendanceList) attendanceList.innerHTML = '';
-
-            players.forEach((player, idx) => {
-                const isMvp = player.name === currentMvp.name;
-                const cardStyle = isMvp ? "background-color: #1f2937; padding: 20px; border-radius: 12px; border: 2px solid #fbbf24; box-shadow: 0 0 15px rgba(251,191,36,0.3);" : "background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
-                const titleBadge = isMvp ? `<span style="display: inline-block; font-size: 11px; background-color: #fbbf24; color: #111827; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 900;">👑 WEEKLY MVP</span>` : `<span style="display: inline-block; font-size: 11px; background-color: #374151; color: #fdba74; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 500;">${player.style}</span>`;
+            
+            if (listA && listB) {
+                listA.innerHTML = ''; 
+                listB.innerHTML = '';
                 
-                grid.innerHTML += `<div style="${cardStyle}"><h4 style="font-size: 18px; font-weight: bold; color: white; margin: 0;">${player.name}</h4>${titleBadge}</div>`;
-
-                if (attendanceList) {
-                    attendanceList.innerHTML += `
-                    <label style="display: flex; align-items: center; justify-content: space-between; background-color: #111827; padding: 10px; border-radius: 8px; border: 1px solid #374151; cursor: pointer; margin-bottom: 2px;">
-                        <span style="font-weight: bold; font-size: 14px;">${player.name} <span style="font-size: 10px; color: #9ca3af; font-weight: normal;">(${player.style})</span></span>
-                        <input type="checkbox" id="check-present-${idx}" checked style="width: 18px; height: 18px; accent-color: #ea580c; margin-bottom: 0;">
-                    </label>`;
-                }
-            });
-
-            if (document.getElementById('player-count-badge')) document.getElementById('player-count-badge').innerText = players.length;
-
-            const mvpSelect = document.getElementById('input-mvp-name');
-            if (mvpSelect) {
-                mvpSelect.innerHTML = '';
-                players.forEach(p => { mvpSelect.innerHTML += `<option value="${p.name}">${p.name}</option>`; });
+                teamA.forEach(p => { listA.innerHTML += `<div style="background-color:#f3f4f6; padding:10px; border-radius:6px; font-weight:bold; font-size:14px; border:1px solid #e5e7eb; color:#111827;">${p.name} <span style="font-size:10px; color:#ca8a04; float:right;">${p.style}</span></div>`; });
+                teamB.forEach(p => { listB.innerHTML += `<div style="background-color:#f3f4f6; padding:10px; border-radius:6px; font-weight:bold; font-size:14px; border:1px solid #e5e7eb; color:#111827;">${p.name} <span style="font-size:10px; color:#ca8a04; float:right;">${p.style}</span></div>`; });
+                
+                document.getElementById('generated-teams-box').style.display = 'grid';
+                
+                // Autoscroll directly to the newly generated rosters
+                document.getElementById('generated-teams-box').scrollIntoView({ behavior: 'smooth' });
             }
         }
-
-        function updateMvpDisplay() {
-            const playerData = players.find(p => p.name === currentMvp.name) || { style: "League Member" };
-            if (document.getElementById('mvp-card-name')) document.getElementById('mvp-card-name').innerText = currentMvp.name;
-            if (document.getElementById('mvp-card-style')) document.getElementById('mvp-card-style').innerText = playerData.style;
-            if (document.getElementById('mvp-card-reason')) document.getElementById('mvp-card-reason').innerText = currentMvp.reason;
-        }
-
-        // Two-Way Sync Pipelines & Fail-safes
-        async function saveToCloud() {
-            const payload = {
-                news: document.getElementById('live-news-ticker').innerText,
-                schedule: document.getElementById('display-schedule').innerText,
-                teams: document.getElementById('display-teams').innerText,
-                liveAlert: document.getElementById('live-match-alert-ticker').style.display,
-                mvp: currentMvp,
-                players: players
-            };
-            try {
-                await fetch(API_URL, { 
-                    method: 'POST', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload) 
-                });
-            } catch (e) { console.log("Cloud backup frame delayed."); }
-        }
-
-        function saveToLocalBackup() {
-            localStorage.setItem('local_satoliya_teams', document.getElementById('display-teams').innerText);
-            localStorage.setItem('local_satoliya_schedule', document.getElementById('display-schedule').innerText);
-            localStorage.setItem('local_satoliya_news', document.getElementById('live-news-ticker').innerText);
-            localStorage.setItem('local_satoliya_liveAlert', document.getElementById('live-match-alert-ticker').style.display);
-            localStorage.setItem('local_satoliya_mvp', JSON.stringify(currentMvp));
-            localStorage.setItem('local_satoliya_players', JSON.stringify(players));
-        }
-
-        async function loadFromCloud() {
-            try {
-                const res = await fetch(API_URL);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.mvp) {
-                        if(data.players && data.players.length > 0) {
-                            players = data.players;
-                        }
-                        currentMvp = data.mvp;
-                        document.getElementById('live-news-ticker').innerText = data.news || "";
-                        document.getElementById('display-schedule').innerText = data.schedule || "";
-                        document.getElementById('display-teams').innerText = data.teams || "";
-                        document.getElementById('live-match-alert-ticker').style.display = data.liveAlert || "none";
-                        
-                        // Smart Optional Safety Checks preventing Hidden input crashes
-                        if(document.getElementById('input-news-text')) document.getElementById('input-news-text').value = data.news || "";
-                        if(document.getElementById('input-schedule')) document.getElementById('input-schedule').value = data.schedule || "";
-                        if(document.getElementById('input-teams')) document.getElementById('input-teams').value = data.teams || "";
-                        return true;
-                    }
-                }
-            } catch (e) { console.log("Database read frame connection deferred."); }
-            return false;
-        }
-
-        // App Boot Loader Engine Initialization
-        window.onload = async function() {
-            const loaded = await loadFromCloud();
-            if (!loaded && localStorage.getItem('local_satoliya_teams')) {
-                document.getElementById('display-teams').innerText = localStorage.getItem('local_satoliya_teams');
-                if (localStorage.getItem('local_satoliya_schedule')) document.getElementById('display-schedule').innerText = localStorage.getItem('local_satoliya_schedule');
-                if (localStorage.getItem('local_satoliya_news')) document.getElementById('live-news-ticker').innerText = localStorage.getItem('local_satoliya_news');
-                if (localStorage.getItem('local_satoliya_liveAlert')) document.getElementById('live-match-alert-ticker').style.display = localStorage.getItem('local_satoliya_liveAlert');
-                currentMvp = JSON.parse(localStorage.getItem('local_satoliya_mvp'));
-                if (localStorage.getItem('local_satoliya_players')) {
-                    const backupPlayers = JSON.parse(localStorage.getItem('local_satoliya_players'));
-                    if (backupPlayers && backupPlayers.length > 0) players = backupPlayers;
-                }
-            }
-            renderPlayerGrid();
-            updateMvpDisplay();
-        };
     </script>
 </body>
 </html>
+
+
 
 
 
