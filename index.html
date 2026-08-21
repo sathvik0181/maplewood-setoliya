@@ -203,6 +203,7 @@
         </div> 
     </section>
     <script>
+        // Complete 27-Player Master League Roster Database Array
         let players = [
             { name: "Sathvik", style: "Center Catcher" }, { name: "Saanvi", style: "Striker" },
             { name: "Sri", style: "Beginner" }, { name: "Raghu", style: "All-Rounder" },
@@ -225,6 +226,7 @@
         const BUCKET_KEY = "maplewood_satoliya_v3";
         const API_URL = `https://kvdb.io{BUCKET_KEY}`;
 
+        // View Shifter Page Manager Routing Switch
         function switchTab(target) {
             ['home', 'players', 'match', 'admin'].forEach(tab => {
                 const view = document.getElementById(`view-${tab}`);
@@ -237,6 +239,14 @@
             });
         }
 
+        // Live Dynamic Ticker Control System
+        async function toggleLiveGame(status) {
+            document.getElementById('live-match-alert-ticker').style.display = status ? 'block' : 'none';
+            await saveToCloud();
+            saveToLocalBackup();
+            alert(status ? "Live Game ticker broadcasted to everyone globally!" : "Live Game ticker ended globally!");
+        }
+        // Smart Match Generator with Split Balancing Logic
         function generateBalancedTeams() {
             let presentPlayers = [];
             players.forEach((p, idx) => {
@@ -274,12 +284,27 @@
             saveToLocalBackup();
         }
 
-        async function toggleLiveGame(status) {
-            document.getElementById('live-match-alert-ticker').style.display = status ? 'block' : 'none';
-            await saveToCloud();
-            saveToLocalBackup();
-            alert(status ? "Live Game ticker broadcasted to everyone globally!" : "Live Game ticker ended globally!");
+        // Authentication Gateway Validation Gate
+        function checkAuth() {
+            if (document.getElementById('admin-pass').value === 'admin123') {
+                document.getElementById('admin-auth').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'flex';
+                renderAdminControls();
+            } else {
+                alert('Access Denied: Incorrect Admin Password');
+            }
         }
+
+        // Roster Database Management and Clean Rooms
+        function renderAdminControls() {
+            const deleteContainer = document.getElementById('admin-delete-list');
+            if (!deleteContainer) return;
+            deleteContainer.innerHTML = '';
+            players.forEach((p, idx) => {
+                deleteContainer.innerHTML += `<button onclick="removePlayer(${idx})" style="background-color: #111827; border: 1px solid #7f1d1d; color: #9ca3af; padding: 6px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; margin: 2px;">${p.name} ×</button>`;
+            });
+        }
+
         function addNewPlayer() {
             const name = document.getElementById('new-name').value.trim();
             const style = document.getElementById('new-style').value;
@@ -298,7 +323,7 @@
                 saveToCloud(); saveToLocalBackup();
             }
         }
-
+        // Global Broadcast Dispatch Commands
         async function updateSchedule() {
             const teams = document.getElementById('input-teams').value;
             const schedule = document.getElementById('input-schedule').value;
@@ -326,6 +351,46 @@
             switchTab('home');
         }
 
+        // Interface Display Rendering Sub-Engines
+        function renderPlayerGrid() {
+            const grid = document.getElementById('player-profile-grid');
+            const attendanceList = document.getElementById('match-attendance-list');
+            if (!grid) return;
+            grid.innerHTML = ''; if (attendanceList) attendanceList.innerHTML = '';
+
+            players.forEach((player, idx) => {
+                const isMvp = player.name === currentMvp.name;
+                const cardStyle = isMvp ? "background-color: #1f2937; padding: 20px; border-radius: 12px; border: 2px solid #fbbf24; box-shadow: 0 0 15px rgba(251,191,36,0.3);" : "background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
+                const titleBadge = isMvp ? `<span style="display: inline-block; font-size: 11px; background-color: #fbbf24; color: #111827; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 900;">👑 WEEKLY MVP</span>` : `<span style="display: inline-block; font-size: 11px; background-color: #374151; color: #fdba74; padding: 2px 8px; border-radius: 4px; margin-top: 4px; font-weight: 500;">${player.style}</span>`;
+                
+                grid.innerHTML += `<div style="${cardStyle}"><h4 style="font-size: 18px; font-weight: bold; color: white; margin: 0;">${player.name}</h4>${titleBadge}</div>`;
+
+                if (attendanceList) {
+                    attendanceList.innerHTML += `
+                    <label style="display: flex; align-items: center; justify-content: space-between; background-color: #111827; padding: 10px; border-radius: 8px; border: 1px solid #374151; cursor: pointer; margin-bottom: 2px;">
+                        <span style="font-weight: bold; font-size: 14px;">${player.name} <span style="font-size: 10px; color: #9ca3af; font-weight: normal;">(${player.style})</span></span>
+                        <input type="checkbox" id="check-present-${idx}" checked style="width: 18px; height: 18px; accent-color: #ea580c; margin-bottom: 0;">
+                    </label>`;
+                }
+            });
+
+            if (document.getElementById('player-count-badge')) document.getElementById('player-count-badge').innerText = players.length;
+
+            const mvpSelect = document.getElementById('input-mvp-name');
+            if (mvpSelect) {
+                mvpSelect.innerHTML = '';
+                players.forEach(p => { mvpSelect.innerHTML += `<option value="${p.name}">${p.name}</option>`; });
+            }
+        }
+
+        function updateMvpDisplay() {
+            const playerData = players.find(p => p.name === currentMvp.name) || { style: "League Member" };
+            if (document.getElementById('mvp-card-name')) document.getElementById('mvp-card-name').innerText = currentMvp.name;
+            if (document.getElementById('mvp-card-style')) document.getElementById('mvp-card-style').innerText = playerData.style;
+            if (document.getElementById('mvp-card-reason')) document.getElementById('mvp-card-reason').innerText = currentMvp.reason;
+        }
+
+        // Two-Way Sync Pipelines & Fail-safes
         async function saveToCloud() {
             const payload = {
                 news: document.getElementById('live-news-ticker').innerText,
@@ -336,9 +401,14 @@
                 players: players
             };
             try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-            } catch (e) { console.log("Cloud backup frame connection delayed."); }
+                await fetch(API_URL, { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload) 
+                });
+            } catch (e) { console.log("Cloud backup frame delayed."); }
         }
+
         function saveToLocalBackup() {
             localStorage.setItem('local_satoliya_teams', document.getElementById('display-teams').innerText);
             localStorage.setItem('local_satoliya_schedule', document.getElementById('display-schedule').innerText);
@@ -354,23 +424,27 @@
                 if (res.ok) {
                     const data = await res.json();
                     if (data && data.mvp) {
-                        if(data.players) players = data.players;
+                        if(data.players && data.players.length > 0) {
+                            players = data.players;
+                        }
                         currentMvp = data.mvp;
                         document.getElementById('live-news-ticker').innerText = data.news || "";
                         document.getElementById('display-schedule').innerText = data.schedule || "";
                         document.getElementById('display-teams').innerText = data.teams || "";
                         document.getElementById('live-match-alert-ticker').style.display = data.liveAlert || "none";
                         
-                        document.getElementById('input-news-text').value = data.news || "";
-                        document.getElementById('input-schedule').value = data.schedule || "";
-                        document.getElementById('input-teams').value = data.teams || "";
+                        // Smart Optional Safety Checks preventing Hidden input crashes
+                        if(document.getElementById('input-news-text')) document.getElementById('input-news-text').value = data.news || "";
+                        if(document.getElementById('input-schedule')) document.getElementById('input-schedule').value = data.schedule || "";
+                        if(document.getElementById('input-teams')) document.getElementById('input-teams').value = data.teams || "";
                         return true;
                     }
                 }
-            } catch (e) { console.log("KVDB read frame offline, using fallback state."); }
+            } catch (e) { console.log("Database read frame connection deferred."); }
             return false;
         }
 
+        // App Boot Loader Engine Initialization
         window.onload = async function() {
             const loaded = await loadFromCloud();
             if (!loaded && localStorage.getItem('local_satoliya_teams')) {
@@ -379,7 +453,10 @@
                 if (localStorage.getItem('local_satoliya_news')) document.getElementById('live-news-ticker').innerText = localStorage.getItem('local_satoliya_news');
                 if (localStorage.getItem('local_satoliya_liveAlert')) document.getElementById('live-match-alert-ticker').style.display = localStorage.getItem('local_satoliya_liveAlert');
                 currentMvp = JSON.parse(localStorage.getItem('local_satoliya_mvp'));
-                if (localStorage.getItem('local_satoliya_players')) players = JSON.parse(localStorage.getItem('local_satoliya_players'));
+                if (localStorage.getItem('local_satoliya_players')) {
+                    const backupPlayers = JSON.parse(localStorage.getItem('local_satoliya_players'));
+                    if (backupPlayers && backupPlayers.length > 0) players = backupPlayers;
+                }
             }
             renderPlayerGrid();
             updateMvpDisplay();
@@ -387,6 +464,7 @@
     </script>
 </body>
 </html>
+
 
 
 
